@@ -1,0 +1,1 @@
+<div class="footer"> <a class="btn-top" href="javascript:void(0);" title="Top" style="display: none;"><img src="images/top_icon.png" alt ="back to top"></a> </div>
