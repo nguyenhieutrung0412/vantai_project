@@ -37,18 +37,26 @@
 <link rel="stylesheet" type="text/css" href="template/Default/style/main.css" media="all"/>
 <link rel="stylesheet" type="text/css" href="template/Default/style/mobile.css" media="all"/>
 <link rel="stylesheet" type="text/css" href="template/Default/style/colorbox.css" media="all"/>
-<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="template/Default/style/1.12.1_themes_smoothness_jquery-ui.css" />
 
-</script><script type="text/javascript" src="template/Default/js/jquery-3.6.0.min.js"></script>
-</script><script type="text/javascript" src="template/Default/js/main.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="text/javascript" src="template/Default/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="template/Default/js/main.js"></script>
 
-<script type="text/javascript" src="template/Default/js/chartjs.js"></script>
- <script src="https://cdn.jsdelivr.net/picturefill/2.3.1/picturefill.min.js"></script>
+
+
+
+ <script type="text/javascript" src="template/Default/js/2.3.1_picturefill.min.js"></script>
  <script type="text/javascript" src="template/Default/js/lightgallery-all.min.js"></script>
  <script type="text/javascript" src="template/Default/js/jquery.mousewheel.min.js"></script>
-  <script type="text/javascript" src="template/Default/js/jquery.colorbox.js"></script>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/dubrox/Multiple-Dates-Picker-for-jQuery-UI@master/jquery-ui.multidatespicker.js"></script>
+
+
+  <script type="text/javascript" src="template/Default/js/1.10.2_jquery.min.js"></script>
+  <script type="text/javascript" src="template/Default/js/1.12.1_jquery-ui.min.js"></script>
+
+<script type="text/javascript" src="template/Default/js/jquery-ui.multidatespicker.js"></script>
+
+  <script type="text/javascript" src="template/Default/js/jquery.colorbox-min.js"></script>
+
+
+  <script defer   src="template/Default/js/notification_push.js"></script>

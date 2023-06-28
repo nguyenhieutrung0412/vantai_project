@@ -26,8 +26,8 @@
 
                      <thead>
                         <tr  class="title-table">
-                            <th>Loại chi</th>
-                            <th>Số lần chi</th>
+                            <th style="width: 50%;">Loại chi</th>
+                            <th style="width: 10%;">Số lần chi</th>
                             <th>Tổng số tiền</th>
                         </tr>
 
@@ -37,11 +37,32 @@
                           
                     </tbody>
                </table>
+                <table class="detail-container ">
+
+                    <tbody>
+                           {detail.theodoidau_list}
+                        
+                    </tbody>
+               </table>
+                 <table class="detail-container ">
+
+                    <tbody>
+                           {detail.theodoisuachua_list}
+                        
+                    </tbody>
+               </table>
             
                    <table class="detail-container ">
 
                     <tbody>
                            {detail.luongnhansu_list}
+                        
+                    </tbody>
+               </table>
+               <table class="detail-container ">
+
+                    <tbody>
+                           {detail.luongtaixe_list}
                         
                     </tbody>
                </table>

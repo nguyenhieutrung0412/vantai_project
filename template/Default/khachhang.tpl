@@ -14,7 +14,7 @@
                     </a>
                 </div>
             </div>
-            <div class="table">
+            <div class="table table_scroll">
                
                 <div class="first-table">
 
@@ -25,8 +25,8 @@
                     </div>
 
                   
-                        <form class="form-search-table" action="" method="post" enctype="multipart/form-data">
-                            <input class="input" type="text" name="ma_kh" placeholder="Mã khách hàng">
+                         <form class="form-search-table" id="form_search_table"  method="post"  onsubmit="return search_link('khachhang','search','form_search_table')" enctype="multipart/form-data">
+                
                             <input class="input" type="text" name="name_kh" placeholder="Họ tên khách hàng">
                             <input class="input" type="tel" name="sdt_kh" placeholder="Số điện thoại ">
                             <button>Refresh</button>
@@ -43,11 +43,12 @@
                             <th>Họ và tên</th>
                             <th>Số điện thoại</th>
                             <th>Địa chỉ</th>
-                            <th>Email</th>
+                         
                             <th>Tên công ty</th>
                             <th>Mã số thuế</th>
-                            <th>CMND/CCCD</th>
+                            <th>Bảng giá hợp đồng</th>
                             <!--BOX boxadmin-->
+
                             <th>Mật khẩu</th>
                               <!--BOX boxadmin-->
                             <th>Lựa chọn</th>
@@ -61,10 +62,10 @@
                             <td>{detail.name_kh}</td>
                             <td>{detail.phone_kh}</td>
                             <td>{detail.address_kh}</td>
-                            <td>{detail.email_kh}</td>
+                           
                             <td>{detail.ten_congty}</td>
                             <td>{detail.masothue}</td>
-                            <td>{detail.cmnd}</td>
+                            <td  class="btn-thuongnong" ><a class="color-1"href="javascript:void(0)"  onclick="return update_view('khachhang','banggia-view',{detail.id_security})">{detail.text_hopdong}</a></td>
                              <!--BOX boxadmin--><td>{detail.pwd2}</td> <!--BOX boxadmin-->
                             <td class="select">
                             
@@ -103,19 +104,20 @@
 
 <div class="popup-create">
         <div class="pop-up">
+        <span class="close_pop">×</span>
             <h3>Thêm mới</h3>
-            <form name="frmAddKhachHang" id="frmAddKhachHang" method="post" onsubmit = "return add_not_reload('khachhang','add','frmAddKhachHang',1)"  enctype="multipart/form-data">
+            <form name="frmAddKhachHang" id="frmAddKhachHang" method="post" onsubmit = "return add('khachhang','add','frmAddKhachHang',1)"  enctype="multipart/form-data">
                 <div >
                     <table class="table-input">
                         <tbody>
                             <tr>
-                                <td class="td-first">Họ và tên</td>
+                                <td class="td-first">Họ và tên *</td>
                                 <td>
                                     <input type="text" name="name"  placeholder="Name"  required>
                                 </td>
                             </tr>
                              <tr>
-                                <td class="td-first">Số điện thoại</td>
+                                <td class="td-first">Số điện thoại *</td>
                                 <td>
                                     <input type="tel" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="10" name="phone"  placeholder="Số điện thoại" required>
                                 </td>
@@ -123,15 +125,10 @@
                              <tr>
                                 <td class="td-first">Địa chỉ</td>
                                 <td>
-                                    <input type="text" name="address"  placeholder="Địa chỉ" required>
+                                    <input type="text" name="address"  placeholder="Địa chỉ">
                                 </td>
                             </tr>
-                             <tr>
-                                <td class="td-first">Email</td>
-                                <td>
-                                <input type="email" name="email"  placeholder="Email" required>
-                                </td>
-                            </tr>
+                   
                              <tr>
                                 <td class="td-first">Tên công ty</td>
                                 <td>
@@ -144,16 +141,8 @@
                                 <input type="text" name="masothue"  placeholder="Mã số thuế(nếu có)" >
                                 </td>
                             </tr>
-                             <tr>
-                                <td class="td-first">CMND/CCCD</td>
-                                <td>
-                                <input type="text" name="cmnd"  placeholder="CMND/CCCD" required>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="td-first">Mật khẩu</td>
-                                <td><input type="password" name="password" placeholder="Mật khẩu" required></td>
-                            </tr>
+               
+                        
                         </tbody>
                     </table>
                 </div>

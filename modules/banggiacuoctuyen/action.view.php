@@ -51,8 +51,9 @@ while($rs = $loai_hang->fetch()){
 
 
 	// format tien te
-	$rs['so_tien'] = number_format($rs['so_tien'], 0, ',', '.') . "VND";
+	$rs['so_tien'] = number_format($rs['so_tien'], 0, ',', '.') . "";
 	$rs['km'] = number_format($rs['km'], 0, ',', '.') . " Km";
+	$rs['luong_chuyen'] = number_format($rs['luong_chuyen'], 0, ',', '.') ;
 	$tpl->assign($rs,'detail');
 	
 	

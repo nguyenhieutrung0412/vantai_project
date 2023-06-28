@@ -1,6 +1,6 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $module = "'donhangroi'";
+    $module = "'ajaxdonhangroi'";
 
     $action = "'active-donhangcon'";
 
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $code_pics = $oClass->id_encode($ds['id']);
         $code_act = "'" . $code_pics . "'";
 
-        $module = "'donhangroi'";
+      
         $action_delete = "'delete_img'";
         if ($p % 4 == 0) {
             $ds['fix'] = ' fix';
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <li  id="pics_' . $code_pics . '"  class="' . $ds['fix'] . '">
                   
                         <a class="colorbox group1" style="cursor:zoom-in" href="data/upload/images/' . $ds['file_name'] . '" >
-                            <img class="img-responsive" src="data/upload/images/' . $ds['file_name'] . '">
+                            <img class="img-responsive" src="../data/upload/images/' . $ds['file_name'] . '">
                         </a>
                    
                     <span class="color-0" onclick="return deleteImage(' . $module . ',' . $action_delete . ',' . $code_act . ')"><i class="fa fa-trash "></i> Xóa</span>
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <li  id="pics_' . $code_pics . '"  class="' . $ds['fix'] . '">
                   
                         <a class="colorbox group1" style="cursor:zoom-in" href="data/upload/images/' . $ds['file_name'] . '" >
-                            <img class="img-responsive" src="data/upload/images/' . $ds['file_name'] . '">
+                            <img class="img-responsive" src="../data/upload/images/' . $ds['file_name'] . '">
                         </a>
                    
                    
@@ -73,31 +73,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($rs['tinhtrangdon'] == 0) {
         $str = '
-        <div class="pop-up">
-        <h3>Thêm thông tin người thực nhận</h3>
+        <div class="popup">
+        <h4>Thêm thông tin người thực nhận</h4>
         <form name="frmAddactive" id="frmAddactive" method="post" onsubmit ="return _edit(' . $module . ',' . $action . ',' . $frm . ',' . $img_file . ')"  enctype="multipart/form-data">
             <div >
                 <table class="table-input">
                     <tbody>
                         <tr>
-                            <td class="td-first">Họ và tên người nhận</td>
+                            <td class="td-first">Họ và tên người nhận *</td>
                             <td>
-                                <input type="text" name="ten_nguoinhan_thuc"   value="' . $rs['ten_nguoinhan_thuc'] . '"  placeholder="Name"  required>
+                                <input type="text" name="ten_nguoinhan"   value="' . $rs['ten_nguoinhan'] . '"  placeholder="Name"  required>
                             </td>
                         </tr>
                          <tr>
-                            <td class="td-first">Số điện thoại người nhận</td>
+                            <td class="td-first">Số điện thoại người nhận *</td>
                             <td>
-                                <input type="tel"   value="' . $rs['phone_nguoinhan_thuc'] . '" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="10" name="phone_nguoinhan_thuc"  placeholder="Số điện thoại" required>
+                                <input type="tel"   value="' . $rs['phone_nguoinhan'] . '" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="10" name="phone_nguoinhan"  placeholder="Số điện thoại" required>
                             </td>
                         </tr>
                          <tr>
-                            <td class="td-first">CMND/CCCD</td>
+                            <td class="td-first">CMND/CCCD *</td>
                             <td>
-                                <input type="text" name="cmnd_nguoinhan_thuc"   value="' . $rs['cmnd_nguoinhan_thuc'] . '"  placeholder="CMND/CCCD" required>
+                                <input type="text" name="cmnd_nguoinhan"   value="' . $rs['cmnd_nguoinhan'] . '"  placeholder="CMND/CCCD" required>
                               
                             </td>
                         </tr>
+                    
                         <tr>
                             <td class="td-first">Hình ảnh đính kèm(nếu có)</td>
                             <td><input type="file"  name="img_file[]" id="img_file" multiple accept= "image/*"></td>
@@ -116,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <div class="btn-submit">
               
-                <button type="submit" class="submit">Thêm</button>
+                <button type="submit" class="submit">Cập nhật</button>
                 <button type="reset" onclick="return cancel()" class="cancel">Đóng</button>
             </div>
         </form>
@@ -125,8 +126,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ';
     } else {
         $str = '
-        <div class="pop-up">
-        <h3>Thêm thông tin người thực nhận</h3>
+        <div class="popup">
+        <h4>Thêm thông tin người thực nhận</h4>
         <form name="frmAddactive" id="frmAddactive" method="post" onsubmit ="return _edit(' . $module . ',' . $action . ',' . $frm . ',' . $img_file . ')"  enctype="multipart/form-data">
             <div >
                 <table class="table-input">
@@ -134,19 +135,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <tr>
                             <td class="td-first">Họ và tên người nhận</td>
                             <td>
-                                <input type="text" name="ten_nguoinhan_thuc"   value="' . $rs['ten_nguoinhan_thuc'] . '"  placeholder="Name" readonly  required>
+                                <input type="text" name="ten_nguoinhan"   value="' . $rs['ten_nguoinhan'] . '"  placeholder="Name" readonly  required>
                             </td>
                         </tr>
                          <tr>
                             <td class="td-first">Số điện thoại người nhận</td>
                             <td>
-                                <input type="tel"   value="' . $rs['phone_nguoinhan_thuc'] . '" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="10" name="phone_nguoinhan_thuc"  placeholder="Số điện thoại" readonly required>
+                                <input type="tel"   value="' . $rs['phone_nguoinhan'] . '" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="10" name="phone_nguoinhan"  placeholder="Số điện thoại" readonly required>
                             </td>
                         </tr>
                          <tr>
                             <td class="td-first">CMND/CCCD</td>
                             <td>
-                                <input type="text" name="cmnd_nguoinhan_thuc"   value="' . $rs['cmnd_nguoinhan_thuc'] . '"  placeholder="CMND/CCCD" readonly required>
+                                <input type="text" name="cmnd_nguoinhan"   value="' . $rs['cmnd_nguoinhan'] . '"  placeholder="CMND/CCCD" readonly required>
                               
                             </td>
                         </tr>
@@ -165,7 +166,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <div class="btn-submit">
               
-                <button type="submit" class="submit">Thêm</button>
+                <button type="submit" class="submit">Cập nhật</button>
                 <button type="reset" onclick="return cancel()" class="cancel">Đóng</button>
             </div>
         </form>

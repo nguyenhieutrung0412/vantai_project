@@ -16,17 +16,18 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
     if($total==1){
         $str = '
         <div class="pop-up">
-        <h3>Update</h3>
+        <span class="close_pop">×</span>
+        <h3>Cập nhật loại thu</h3>
          <form name="frmUpdateloaithu" id="frmUpdateloaithu" method="post" onsubmit = "return _edit('.$module.','.$update.','.$frm.',1)"  enctype="multipart/form-data">
             
          <table class="table-input">
          <tbody>
              <tr>
-                 <td class="td-first">Tên loại thu</td>
+                 <td class="td-first">Tên loại thu *</td>
                  <td> <input type="text" name="name_loaithu"  placeholder="Tên loại thu" value="'.$rs['loaithu'].'"  required></td>
              </tr>
              <tr>
-                <td class="td-first">Hạn mức chi</td>
+                <td class="td-first">Hạn mức chi *</td>
                 <td><input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  name="hanmucthu" value="'.$rs['hanmucthu'].'"  placeholder="Hạn mức thu" required></td>
             </tr>
             <tr>
@@ -36,10 +37,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
             <input type="hidden" name="id" value="'.$rs['id_security'].'">
             <div class="btn-submit">
                 
-                <button type="submit" class="submit">Update</button>
+                <button type="submit" class="submit">Cập nhật</button>
                 <button type="reset" onclick="return cancel()" class="cancel">Đóng</button>
             </div>
         </form>
+        <script type="text/javascript" src="template/Default/js/main_load.js"></script>
     </div>
         ';
         die(json_encode(

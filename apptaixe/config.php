@@ -8,7 +8,7 @@
 defined('_ROOT') or die(__FILE__);
 $cfg['template'] = 'Default';
 $cfg['root_admin'] = true;
-$cfg['client'] = 'Sitename';
+$cfg['client'] = 'LogisViet';
 $cfg['sef'] = true;
 
 // config includes files for application
@@ -22,8 +22,8 @@ $i = -1;
 
 
 $i++;
-$MenuName[$i] = array('name'=>'Category','link'=>'');
-$MenuLink[$i][] = array('name'=>'Dịch vụ','link'=>'?mod=content&type=1');
+$MenuName[$i] = array('name'=>'Home','link'=>'/');
+$MenuLink[$i][] = array('name'=>'Dịch vụ','link'=>'?mod=user&act=logout');
 
 $i++;
 $MenuName[$i] = array('name'=>'Sản phẩm','link'=>'');

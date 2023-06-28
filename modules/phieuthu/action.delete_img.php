@@ -8,7 +8,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
     $rs= $result->fetch();
     if($total == 1){
         unlink('data/upload/images/'.$rs['file_name']);
-        $oClass->delete("php_images","id = '".$id."' AND type = 'php_phieuthu' ");
+        $oClass->delete("php_images","id = '".$id."' AND type = 'php_taixe' ");
       
         die(json_encode(
             array(

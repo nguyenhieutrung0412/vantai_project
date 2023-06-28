@@ -14,7 +14,7 @@
                     </a>
                 </div>
             </div>
-            <div class="table">           
+            <div class="table table_scroll">           
                 <div class="first-table">
                     <div class="btn-new">
                         <a class="btn-create {xuly.them}"><i class="fa-solid fa-plus"></i> Tạo mới</a>
@@ -38,7 +38,7 @@
                             <td>{detail.chuc_vu}</td>
                             <!--BOX boxadmin-phanquyen-->
                             <td class="phanquyen">
-                                <a class="btn-phanquyen" onclick="return phanquyenview({detail.id_security})" > <i class="fa-solid fa-shield-halved icon-phanquyen"></i></a>
+                                <a class="btn-phanquyen" onclick="return phanquyenview('phongban',{detail.id_security})" > <i class="fa-solid fa-shield-halved icon-phanquyen"></i></a>
                             </td>
                             <!--BOX boxadmin-phanquyen-->
                             <td class="select">
@@ -76,13 +76,14 @@
 
 <div class="popup-create">
         <div class="pop-up">
+        <span class="close_pop">×</span>
             <h3>Thêm mới</h3>
             <form name="frmAddphongban" id="frmAddphongban" method="post" onsubmit = "return add('phongban','add','frmAddphongban',1)"  enctype="multipart/form-data">
                
                  <table class="table-input">
                     <tbody>
                         <tr>
-                            <td class="td-first">Họ và tên</td>
+                            <td class="td-first">Họ và tên *</td>
                             <td>  <input type="text" name="name"  placeholder="Name"  required></td>
                         </tr>
                     </tbody>

@@ -6,7 +6,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
     $id = $oClass->id_decode($_POST['id']);
     $result = $oContent->view_table("php_congnokhachhang", "`id`= ".$id." LIMIT 1");
      $rs = $result->fetch();
-    if($_SESSION['chucvu_id'] == 0 ||$_SESSION['chucvu'] == 'Giám đốc')
+    if($_SESSION['chucvu_id'] == 0 ||$_SESSION['chucvu_id'] == 1 ||$_SESSION['chucvu_id'] == 2 ||$_SESSION['chucvu_id'] == 3)
     {
 
     

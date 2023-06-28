@@ -11,13 +11,35 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     
    );
  
-    $oClass->update("php_nhansu",$data,"id=".$data['id']);
+    $result = $oContent->view_table("php_nhansu", "`phone`=".$data['phone']."  LIMIT 1");
+    $total = $result->num_rows();
+     if($total == 0){
+        
+             
+        $oClass->update("php_nhansu",$data,"id=".$data['id']);
+    
+             die(json_encode(
+              array(
+                  'status'=> '1',
+                  'msg' => 'Cập nhật thành công'
+              )
+             ));
+        
+    
+ 
+        
+     }else{
+         die(json_encode(array(
+             'status' => '0',
+             'msg' => 'Không thể cập nhật dữ liệu (Không thể tạo admin hoặc bị trùng số điện thoại)'
+         )));
+     }
    
    die(json_encode(
     array(
        
         'status'=> '1',
-        'msg' => 'Thêm thành công'
+        'msg' => 'Cập nhật thành công'
     )
    ));
 
@@ -25,7 +47,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 else{
     die(json_encode(array(
         'status' => '0',
-        'msg' => 'Thêm thất bại'
+        'msg' => 'Cập nhật thất bại'
     )));
    
 }

@@ -1,10 +1,11 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $module = "'donhang'";
-    $action = "'formhinhthucthanhtoan'";
-    $id_thanhtoanbangcuoc = "'rd-thanhtoanbangcuoc'";
-    $id_thanhtoannhapcuoc = "'rd-thanhtoannhapcuoc'";
-    $name_form = "'form-hinhthucthanhtoan'";
+        $module = "'donhang'";
+        $action = "'formhinhthucthanhtoan'";
+        $id_thanhtoanbangcuoc = "'rd-thanhtoanbangcuoc'";
+        $id_thanhtoannhapcuoc = "'rd-thanhtoannhapcuoc'";
+        $name_form = "'form-hinhthucthanhtoan'";
+        $idSelect = "'thanhtoan_select'";
     $result = $oContent->view_table("php_khachhang", "id=" . $_POST['data2']);
     $rs = $result->fetch();
     if ($_POST['data'] == "cungkhach") {
@@ -14,26 +15,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                  
         <td colspan = "2">
             <div class="input-formnguoinhan">
-                <label>Loại hàng: </label> <input type="text" name="loaihang" required><br>
+                <label>Mô tả hàng hóa: * </label> <input type="text" name="loaihang" required><br>
+            </div>
+       
+            
+          
+      
+           
+        
+            <div class="input-formnguoinhan">
+                <label>Trọng lượng hàng hóa: * </label> <input type="text" name="trongluong_hanghoa" placeholder="Nhập theo giá trị kg. VD: 1500.5kg" required><br>
+            </div>
+           
+            <div class="input-formnguoinhan">
+                <label>Địa chỉ nhận hàng: * </label> <input type="text" name="diachi_nhanhang" value="" required><br>
+            </div>
+            
+            <div class="input-formnguoinhan">
+                <label>Thời gian nhận hàng: * </label> <input class="time_input" type="text" id="datepicker" name="thoigian_nhanhang"  required>
+                <label for="gio_nhanhang" class="time_input">Giờ: * </label> <input class="time_input-hours" type="number" min="0" max="23"  name="gio_nhanhang"  required>
+                <label class="time_input">Phút: * </label> <input class="time_input-hours" type="number"  name="phut_nhanhang" value="00" min="0" max="59"  required>
             </div>
             <div class="input-formnguoinhan">
-                <label>Tên người nhận: </label> <input type="text" name="ten_nguoinhan"  value="' . $rs['name_kh'] . '" required><br>
+                <label>Địa chỉ giao hàng: * </label> <input type="text" name="diachi_giaohang" value="" required><br>
             </div>
             <div class="input-formnguoinhan">
-                <label>Địa chỉ nhận hàng: </label> <input type="text" name="diachi_nhanhang" value="' . $rs['address_kh'] . '" required><br>
+                <label>Thời gian giao hàng: * </label> <input type="text" class="time_input" id="datepicker_2" name="thoigian_giaohang"  required>
+                <label for="gio_nhanhang" class="time_input">Giờ: * </label> <input class="time_input-hours" type="number" min="0" max="23" name="gio_giaohang"  required>
+                <label class="time_input">Phút: * </label> <input class="time_input-hours" type="number" min="0" max="59" name="phut_giaohang" value="00"  required>
             </div>
             <div class="input-formnguoinhan">
-                <label>Thời gian nhận hàng:: </label> <input type="text" id="datepicker" name="thoigian_nhanhang"  required><br>
+                <label>Tên người nhận: * </label> <input type="text" name="ten_nguoinhan"  value="" required><br>
             </div>
             <div class="input-formnguoinhan">
-                <label>Địa chỉ giao hàng: </label> <input type="text" name="diachi_giaohang" value="' . $rs['address_kh'] . '" required><br>
+                <label>Số điện thoại người nhận: * </label> <input type="tel" value="" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="10" name="phone_nguoinhan" required><br>
             </div>
-            <div class="input-formnguoinhan">
-                <label>Số điện thoại người nhận: </label> <input type="tel" value="' . $rs['phone_kh'] . '" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="10" name="phone_nguoinhan" required><br>
-            </div>
-            <div class="input-formnguoinhan">
-                <label>CMND/CCCD: </label> <input type="text" value="' . $rs['cmnd'] . '"  name="cmnd-nguoinhan" required><br>
-            </div>
+          
             <div class="input-formnguoinhan">
                 
                 <div class="select_filter">
@@ -64,6 +81,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $( "#datepicker" ).datepicker({
                         dateFormat: "dd/m/yy"
                     });
+                    $( "#datepicker_2" ).datepicker({
+                        dateFormat: "dd/m/yy"
+                    });
 
                     $("input[type=radio][name=rd-hinhthucthanhtoan]").on("change", function() {
                        
@@ -87,26 +107,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $str = '
                     <td colspan = "2">
                     <div class="input-formnguoinhan">
-                        <label>Loại hàng: </label> <input type="text" name="loaihang" required><br>
+                        <label>Mô tả hàng hóa: *</label> <input type="text" name="loaihang" required><br>
                     </div>
                     <div class="input-formnguoinhan">
-                        <label>Tên người nhận: </label> <input type="text" name="ten_nguoinhan"   required><br>
+                    <label>Số lượng hàng hóa: *</label> <input type="text"   name="soluong_hanghoa" placeholder="Nhập số lượng hàng hóa" required>
+                  
+                       
+                
+                </div>
+                    <div class="input-formnguoinhan">
+                        <label>Trọng lượng hàng hóa: *</label> <input type="text" name="trongluong_hanghoa" placeholder="Nhập theo giá trị kg. VD: 1500.5kg" required><br>
                     </div>
                     <div class="input-formnguoinhan">
-                        <label>Địa chỉ nhận hàng: </label> <input type="text" name="diachi_nhanhang" value="' . $rs['address_kh'] . '" required><br>
+                        <label>Địa chỉ nhận hàng: *</label> <input type="text" name="diachi_nhanhang" value="" required><br>
                     </div>
                     <div class="input-formnguoinhan">
-                        <label>Thời gian nhận hàng:: </label> <input type="text" id="datepicker" name="thoigian_nhanhang"  required><br>
+                        <label>Thời gian nhận hàng:* </label> <input class="time_input" type="text" id="datepicker" name="thoigian_nhanhang"  required>
+                        <label for="gio_nhanhang" *class="time_input">Giờ: </label> <input class="time_input-hours" type="number" min="0" max="23"  name="gio_nhanhang"  required>
+                        <label class="time_input">Phút: </label> <input class="time_input-hours" type="number"  name="phut_nhanhang" value="00" min="0" max="59"  required>
                     </div>
                     <div class="input-formnguoinhan">
-                        <label>Địa chỉ giao hàng: </label> <input type="text" name="diachi_giaohang"  required><br>
+                        <label>Địa chỉ giao hàng: *</label> <input type="text" name="diachi_giaohang"  required><br>
                     </div>
                     <div class="input-formnguoinhan">
-                        <label>Số điện thoại người nhận: </label> <input type="tel"  onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="10" name="phone_nguoinhan" required><br>
+                        <label>Thời gian giao hàng: *</label> <input type="text" class="time_input" id="datepicker_2" name="thoigian_giaohang"  required>
+                        <label for="gio_nhanhang" class="time_input">Giờ: </label> <input class="time_input-hours" type="number" min="0" max="23" name="gio_giaohang"  required>
+                        <label class="time_input">Phút: </label> <input class="time_input-hours" type="number" min="0" max="59" name="phut_giaohang" value="00"  required>
                     </div>
                     <div class="input-formnguoinhan">
-                        <label>CMND/CCCD: </label> <input type="text"   name="cmnd-nguoinhan" required><br>
+                        <label>Tên người nhận: *</label> <input type="text" name="ten_nguoinhan"   required><br>
                     </div>
+                    <div class="input-formnguoinhan">
+                        <label>Số điện thoại người nhận: *</label> <input type="tel"  onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="10" name="phone_nguoinhan" required><br>
+                    </div>
+                   
                     <div class="input-formnguoinhan">
                         
                         <div class="select_filter">
@@ -130,7 +164,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </td>
                 <script>
                 $( function() {
+                  
                     $( "#datepicker" ).datepicker({
+                        dateFormat: "dd/m/yy"
+                    });
+                    $( "#datepicker_2" ).datepicker({
                         dateFormat: "dd/m/yy"
                     });
 

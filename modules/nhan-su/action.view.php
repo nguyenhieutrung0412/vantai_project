@@ -7,7 +7,7 @@
  */
 defined('_ROOT') or die(__FILE__);
 if(!isset($_SESSION['id_taixe']) && !isset($_SESSION['position']) && $_SESSION['active'] == 0){
-	header("Location: ".$domain."login");
+	header("Location: ".$domain);
 	exit;
 }
 
@@ -25,45 +25,106 @@ if(in_array($_SESSION['chucvu_id'],$arr)){
 	$tpl->box('boxadmin');
 }
 
+if($_GET['name'] =='' && !isset($_GET['phone']) && !isset($_GET['chucvu']) )
+{
+	//Phân trang
+	$nhan_su = $oContent->view_table('php_nhansu');
+	//lấy tổng số phần tử tin 
+	$total = $nhan_su->num_rows();
 
-//Phân trang
-$nhan_su = $oContent->view_table('php_nhansu');
-//lấy tổng số phần tử tin 
-$total = $nhan_su->num_rows();
-
-$limit = 20;
-$start = $limit*intval($_GET['page']);
-$url = $system->root_dir.'nhan-su';
-$dp = new paging($url,$total,$limit);
-$dp->current = '<a class="active_page">%d</a>';
-$tpl->assign(array('divpage'=>$dp->simple(10)));
-
-
-$nhan_su = $oContent->view_pagination('php_nhansu',1,$start,$limit);
+	$limit = 20;
+	$start = $limit*intval($_GET['page']);
+	$url = $system->root_dir.'nhan-su';
+	$dp = new paging($url,$total,$limit);
+	$dp->current = '<a class="active_page">%d</a>';
+	$tpl->assign(array('divpage'=>$dp->simple(10)));
 
 
-while($rs = $nhan_su->fetch()){
-	
-	$rs['id_security'] = $oClass->id_encode($rs['id']);
-	
-	//xu lý active
+	$nhan_su = $oContent->view_pagination('php_nhansu',1,$start,$limit);
 
-	if($rs['active'] == 0){
-		$rs['active'] = ' class="active-account-die"';
+
+	while($rs = $nhan_su->fetch()){
+		
+		$rs['id_security'] = $oClass->id_encode($rs['id']);
+		
+		//xu lý active
+
+		if($rs['active'] == 0){
+			$rs['active'] = ' class="active-account-die"';
+		}
+		else if($rs['active'] == 1){
+			$rs['active'] = ' class="active-account"';
+		}
+		// format tien te
+		$rs['format_luong'] = number_format($rs['luong_nhansu'], 0, ',', '.') . "";
+		$rs['phu_cap'] = number_format($rs['phu_cap'], 0, ',', '.') . "";
+		$rs['tien_baohiem'] = number_format($rs['tien_baohiem'], 0, ',', '.') . "";
+		if($rs['position_id'] == 0 ){
+			unset($rs);
+		}
+
+		$tpl->assign($rs,'detail');
+		
+		
 	}
-	else if($rs['active'] == 1){
-		$rs['active'] = ' class="active-account"';
-	}
-	// format tien te
-	$rs['format_luong'] = number_format($rs['luong_nhansu'], 0, ',', '.') . "VND";
-	$rs['phu_cap'] = number_format($rs['phu_cap'], 0, ',', '.') . "VND";
-	$rs['tien_baohiem'] = number_format($rs['tien_baohiem'], 0, ',', '.') . "VND";
-	
-
-	$tpl->assign($rs,'detail');
-	
-	
 }
+else{
+	if($_GET['name'] !='')
+	{
+		
+		 $where .= " AND name LIKE '%".$_GET['name']."%'";
+	}
+	if($_GET['phone'] !='')
+	{
+		$where .= " AND phone LIKE '%".$_GET['phone']."%'";
+	}
+	if($_GET['chucvu'] !='')
+	{
+		$where .=" AND position_id LIKE '%".$_GET['chucvu']."%'";
+	}
+	
+	//Phân trang
+	$nhan_su = $oContent->view_table('php_nhansu');
+	//lấy tổng số phần tử tin 
+	$total = $nhan_su->num_rows();
+
+	$limit = 20;
+	$start = $limit*intval($_GET['page']);
+	$url = $system->root_dir.'nhan-su';
+	$dp = new paging($url,$total,$limit);
+	$dp->current = '<a class="active_page">%d</a>';
+	$tpl->assign(array('divpage'=>$dp->simple(10)));
+
+
+	$nhan_su = $oContent->view_pagination('php_nhansu','active = 1'.$where,$start,$limit);
+
+
+	while($rs = $nhan_su->fetch()){
+		
+		$rs['id_security'] = $oClass->id_encode($rs['id']);
+		
+		//xu lý active
+
+		if($rs['active'] == 0){
+			$rs['active'] = ' class="active-account-die"';
+		}
+		else if($rs['active'] == 1){
+			$rs['active'] = ' class="active-account"';
+		}
+		// format tien te
+		$rs['format_luong'] = number_format($rs['luong_nhansu'], 0, ',', '.') . "";
+		$rs['phu_cap'] = number_format($rs['phu_cap'], 0, ',', '.') . "";
+		$rs['tien_baohiem'] = number_format($rs['tien_baohiem'], 0, ',', '.') . "";
+		if($rs['position_id'] == 0 ){
+			unset($rs);
+		}
+
+		$tpl->assign($rs,'detail');
+		
+		
+	}
+}
+
 //lấy danh sách chức vụ
 
 $list_chucvu = $oContent->view_table('php_phongban');

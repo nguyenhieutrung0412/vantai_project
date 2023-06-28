@@ -2,9 +2,16 @@
 
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    if(htmlspecialchars(trim($_REQUEST['hanmucthu'])) == '')
+    {
+        $num = 0;
+    }
+    else{
+        $num = htmlspecialchars(trim($_REQUEST['hanmucthu']));
+    }
    $data = array(
     'loaithu'=>htmlspecialchars(trim($_REQUEST['name_loaithu'])),
-    'hanmucthu'=>htmlspecialchars(trim($_REQUEST['hanmucthu'])),
+    'hanmucthu'=> $num,
     'baocao'=> 1,
     'active'=> 1
    );

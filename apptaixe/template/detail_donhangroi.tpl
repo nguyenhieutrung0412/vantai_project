@@ -1,15 +1,41 @@
 <div class="title">Đơn hàng - mã: <span class="color-0">{donhangroi.id}</span></div>
 
 <div class="table">
+<div  class="scroll-x">
+<table>
+    <tbody>
+        <tr>
+        <td colspan="2">
+            <div class="timeline timeline2">
+                <div class="timeline-text  child1">Đang thực hiện chuyến</div>
+                 <div class="timeline-line {donhangroi.check-1}">
+                    <a class="btn-timeline" href="javascript:void(0)" onclick="return add_view_timeline('ajaxdonhangroi','timeline-donhangroi-view','{donhangroi.id_security}','1')"><div class="timeline-line_check"><i  class="fa-solid fa-truck-fast {donhangroi.check-1}"></i></div></a>
+                </div>
+            </div>
+            <div class="timeline timeline2">
+                <div class="timeline-text child2">Hoàn thành</div>
+                <div class="timeline-line {donhangroi.check-2}">
+                    <a class="btn-timeline" href="javascript:void(0)" onclick="return add_view_timeline('ajaxdonhangroi','timeline-donhangroi-view','{donhangroi.id_security}','2')"><div class="timeline-line_check"><i  class="fa-solid fa-truck-fast {donhangroi.check-2}"></i></div></a>
+                </div>
+            </div>
+           
+        </td>
+        
+        </tr>
+    </tbody>
+</table>
+</div>
+
     <table >
         <thead>
             <tr>
-                <th colspan="5">  <h5>Danh sách đơn hàng thực hiện</h5></th>
+                <th colspan="6">  <h5>Danh sách đơn hàng thực hiện</h5></th>
             </tr>
             <tr>
                 <th> #</th>
                 <th> ID</th> 
                 <th> Địa chỉ giao hàng</th>
+                <th> Tình trạng hàng</th>
                 <th> Tình trạng đơn</th>
                 <th> Action</th>
                
@@ -22,8 +48,9 @@
                 <td>{donhangroi_s.stt}</td>
                 <td>{donhangroi_s.id}</td>
                 <td>{donhangroi_s.diachi_giaohang}</td>
-                <td>{donhangroi_s.tinhtrangdon_text}</td>
-                <td><a class="color-1 btn-info" onclick="return info('trangchu','info_donhangcon',{donhangroi_s.id_security})">chi tiết<a></td>
+                <td class="{donhangroi_s.color_layhang}">{donhangroi_s.layhang_text}</td>
+                <td class="{donhangroi_s.color}">{donhangroi_s.tinhtrangdon_text}</td>
+                <td><a class="color-1 btn-info" href="javascript:void(0)" onclick="return info('trangchu','info_donhangcon',{donhangroi_s.id_security})">chi tiết<a></td>
             </tr>
         <!--BASIC donhangroi_s--> 
 
@@ -105,6 +132,12 @@
         <h4>Xảy ra lỗi !!!</h4>
     </div> 
 </div>
-<div class="popup_detail ">
-    
+<div class="popup_detail">
+
+</div>
+<div class="popup-timeline">
+
+</div>
+<div class="popup-hoanthanh">
+
 </div>

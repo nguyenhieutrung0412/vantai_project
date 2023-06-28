@@ -14,7 +14,7 @@
                     </a>
                 </div>
             </div>
-            <div class="table">
+            <div class="table table_scroll">
                 <div class="first-table">
                     <div class="btn-new">
                         <a class="btn-create {xulythem}"><i class="fa-solid fa-plus"></i> Tạo mới</a>
@@ -62,7 +62,7 @@
                     </a>
                 </div>
             </div>
-            <div class="table">
+            <div class="table table_scroll">
                 <div class="first-table">
                     <div class="btn-new">
                         <a class="btn-create2 {xulythem}"><i class="fa-solid fa-plus"></i> Tạo mới</a>
@@ -118,6 +118,7 @@
 </div>
 <div class="popup-create">
         <div class="pop-up">
+        <span class="close_pop">×</span>
             <h3>Thêm mới</h3>
             <form autocomplete="off" name="frmAddMenu" id="frmAddMenu" method="post" onsubmit = "return add('menuadmin','add','frmAddMenu',1)"  enctype="multipart/form-data">
                 
@@ -141,6 +142,7 @@
 </div>
 <div class="popup-create2">
         <div class="pop-up">
+        <span class="close_pop">×</span>
             <h3>Thêm mới</h3>
             <form autocomplete="off" name="frmAddMenu-sub" id="frmAddMenu-sub" method="post" onsubmit = "return add('menuadmin','add-sub','frmAddMenu-sub',1)"  enctype="multipart/form-data">
                 

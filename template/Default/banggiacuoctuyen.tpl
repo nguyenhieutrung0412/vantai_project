@@ -13,7 +13,7 @@
                     </a>
                 </div>
             </div>
-            <div class="table">
+            <div class="table table_scroll">
                 <div class="first-table">
                     <div class="btn-new">
                         <a class="btn-create {xuly.them}"><i class="fa-solid fa-plus"></i> Tạo mới</a>
@@ -26,7 +26,9 @@
                             <th>Mã tuyến</th>
                             <th>Tên tuyến</th>
                             <th>Số km</th>
+                            <th>Đơn vị tính</th>
                             <th>Số tiền</th>
+                            <th>Lương chuyến</th>
                             <th>Active</th>
                             <th>Lựa chọn</th>
                         </tr>
@@ -38,7 +40,9 @@
                             <td>{detail.ma_tuyen}</td>
                             <td>{detail.ten_tuyen}</td>
                             <td>{detail.km}</td>
+                            <td>{detail.dvt}</td>
                             <td>{detail.so_tien}</td>
+                            <td>{detail.luong_chuyen}</td>
                             <td class="active"><a {detail.active}  onclick="return active_user('banggiacuoctuyen','active','{detail.id_security}')"> <i class="fa-solid fa-circle "></i> </a></td>
                             <td class="select">
                                 <a class="btn-update {xuly.sua}" onclick="return update_view('banggiacuoctuyen','update-view',{detail.id_security})" data-id ="{detail.id_security}"> <i class="fa-solid fa-pen icon-edit"></i></a>
@@ -75,26 +79,42 @@
 
 <div class="popup-create">
         <div class="pop-up">
+        <span class="close_pop">×</span>
             <h3>Thêm mới</h3>
             <form autocomplete="off" name="frmAddloaihang" id="frmAddloaihang" method="post" onsubmit = "return add('banggiacuoctuyen','add','frmAddloaihang',1)"  enctype="multipart/form-data">
                 
         <table class="table-input">
          <tbody>
             <tr>
-                <td class="td-first">Mã tuyến</td>
+                <td class="td-first">Mã tuyến *</td>
                  <td><input type="text" name="ma_tuyen"  placeholder="Mã tuyến" required></td>
             </tr>
             <tr>
-                <td class="td-first">Tên tuyến</td>
+                <td class="td-first">Tên tuyến *</td>
                  <td><input type="text" name="ten_tuyen"  placeholder="Tên tuyến" required></td>
             </tr>
             <tr>
-                <td class="td-first">Số km</td>
-                 <td><input type="text" name="km" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  placeholder="VD: Nhập 1500 tương đương 1.500km" required></td>
+                <td class="td-first">Số km *</td>
+                 <td><input type="text" name="km"   placeholder="VD:  1.500km" required></td>
             </tr>
             <tr>
-                <td class="td-first">Số tiền</td>
-                 <td><input type="text" name="so_tien" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  placeholder="VD: 1500000" required></td>
+                <td class="td-first">Đơn vị tính *</td>
+                 <td> <select name="dvt" id="dvt">
+                                <option value="tấn">Tấn</option>
+                                <option value="pallet">Pallet</option>
+                                <option value="kiện">Kiện</option>
+                                <option value="thùng">Thùng</option>
+                                <option value="bao">Bao</option>
+                               
+                            </select></td>
+            </tr>
+            <tr>
+                <td class="td-first">Số tiền *</td>
+                 <td><input type="text" name="so_tien"   placeholder="VD: 150.000 or 15,000" required></td>
+            </tr>
+            <tr>
+                <td class="td-first">Lương chuyến </td>
+                 <td><input type="text" name="luong_chuyen"   placeholder="VD: 150.000 or 15,000" ></td>
             </tr>
              
          </tbody>

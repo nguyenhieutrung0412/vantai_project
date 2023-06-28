@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<dwsync>
+<file name="analytic.tpl" server="112.213.86.136/public_html/" local="129586622780000000" remote="129659410200000000" Dst="-1" />
+<file name="category.delete.tpl" server="112.213.86.136/public_html/" local="129586622780000000" remote="129659410200000000" Dst="-1" />
+<file name="category.update.tpl" server="112.213.86.136/public_html/" local="129586622760000000" remote="129659410200000000" Dst="-1" />
+<file name="comment.tpl" server="112.213.86.136/public_html/" local="129586622760000000" remote="129659410200000000" Dst="-1" />
+<file name="configure.addfield.tpl" server="112.213.86.136/public_html/" local="129586622760000000" remote="129659410200000000" Dst="-1" />
+<file name="configure.export.tpl" server="112.213.86.136/public_html/" local="129588820580000000" remote="129659410200000000" Dst="-1" />
+<file name="configure.fields.tpl" server="112.213.86.136/public_html/" local="129586622760000000" remote="129659410200000000" Dst="-1" />
+<file name="configure.module.content.tpl" server="112.213.86.136/public_html/" local="129589718140000000" remote="129659410200000000" Dst="-1" />
+<file name="configure.module.html.tpl" server="112.213.86.136/public_html/" local="129589720140000000" remote="129659410200000000" Dst="-1" />
+<file name="configure.module.options.tpl" server="112.213.86.136/public_html/" local="129589730800000000" remote="129659410200000000" Dst="-1" />
+<file name="configure.new.tpl" server="112.213.86.136/public_html/" local="129586622760000000" remote="129659410200000000" Dst="-1" />
+<file name="configure.tpl" server="112.213.86.136/public_html/" local="129601925360000000" remote="129659410200000000" Dst="-1" />
+<file name="configure.update.tpl" server="112.213.86.136/public_html/" local="129586622760000000" remote="129659410200000000" Dst="-1" />
+<file name="content.empty.tpl" server="112.213.86.136/public_html/" local="129586622760000000" remote="129659410200000000" Dst="-1" />
+<file name="content.featureon.tpl" server="112.213.86.136/public_html/" local="129586622760000000" remote="129659410200000000" Dst="-1" />
+<file name="content.move.tpl" server="112.213.86.136/public_html/" local="129586622760000000" remote="129659410200000000" Dst="-1" />
+<file name="content.tpl" server="112.213.86.136/public_html/" local="129611304140000000" remote="129659410200000000" Dst="-1" />
+<file name="content.update.tpl" server="112.213.86.136/public_html/" local="129586622740000000" remote="129659410200000000" Dst="-1" />
+<file name="contentsub.tpl" server="112.213.86.136/public_html/" local="129586622740000000" remote="129659410200000000" Dst="-1" />
+<file name="gallery.update.tpl" server="112.213.86.136/public_html/" local="129586622740000000" remote="129659410200000000" Dst="-1" />
+<file name="home.tpl" server="112.213.86.136/public_html/" local="129586622740000000" remote="129659410200000000" Dst="-1" />
+<file name="html.update.tpl" server="112.213.86.136/public_html/" local="129586622740000000" remote="129659410200000000" Dst="-1" />
+<file name="language.tpl" server="112.213.86.136/public_html/" local="129586622740000000" remote="129659410800000000" Dst="-1" />
+<file name="language.update.tpl" server="112.213.86.136/public_html/" local="129586622740000000" remote="129659410800000000" Dst="-1" />
+<file name="left.tpl" server="112.213.86.136/public_html/" local="129586622740000000" remote="129659410800000000" Dst="-1" />
+<file name="master_footer.tpl" server="112.213.86.136/public_html/" local="129586622780000000" remote="129659410800000000" Dst="-1" />
+<file name="master_header.tpl" server="112.213.86.136/public_html/" local="129610948900000000" remote="129659410800000000" Dst="-1" />
+<file name="module.tpl" server="112.213.86.136/public_html/" local="129586622740000000" remote="129659410800000000" Dst="-1" />
+<file name="module.update.tpl" server="112.213.86.136/public_html/" local="129586622740000000" remote="129659410800000000" Dst="-1" />
+<file name="options.empty.tpl" server="112.213.86.136/public_html/" local="129586622740000000" remote="129659410800000000" Dst="-1" />
+<file name="options.tpl" server="112.213.86.136/public_html/" local="129586622740000000" remote="129659410800000000" Dst="-1" />
+<file name="options.update.tpl" server="112.213.86.136/public_html/" local="129586622740000000" remote="129659410800000000" Dst="-1" />
+</dwsync>

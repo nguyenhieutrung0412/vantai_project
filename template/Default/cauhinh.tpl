@@ -35,7 +35,7 @@
                         
                     </div>
                     <div class="form-input2 fix">
-                        <label for="">Năm hoạt động phần mền</label>
+                        <label for="">Năm hoạt động phần mềm</label>
                         <input type="text" name="nam_hoatdong" value="{detail.nam_hoatdong}">
                         
                     </div>

@@ -7,9 +7,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $rs = $result->fetch();
                 $data = array(
                 'id'=>$oClass->id_decode($_REQUEST['id']),
-                'thuong_nong' =>htmlspecialchars($_REQUEST['thuongnong']),
+                'thuong_nong' =>$oClass->DoiSoTien(htmlspecialchars($_REQUEST['thuongnong'])),
                 'lydo_thuongnong' =>htmlspecialchars($_REQUEST['lydo_thuongnong']),
-                'tong_luong' => $rs['tong_luong'] + htmlspecialchars($_REQUEST['thuongnong'])
+                'tong_luong' => ($rs['tong_luong'] - $rs['thuong_nong']) + $oClass->DoiSoTien(htmlspecialchars($_REQUEST['thuongnong']))
                 );
                 $oClass->update("php_luongnhansu",$data,"id = ".$data['id']);
                 

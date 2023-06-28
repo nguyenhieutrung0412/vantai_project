@@ -32,7 +32,49 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])) {
     $result_phuxe = $oContent->view_table("php_nhansu", "`id`=" . $rs['id_nhansu'] . "  LIMIT 1");
     $rs_phuxe = $result_phuxe->fetch();
 
-
+      //lấy danh sách hình ảnh nếu có
+      $kt_img = $oContent->view_table("php_images", "type = 'php_donhangtrongoi' AND type_id = '" . $rs['id'] . "'");
+      $total_img = $kt_img->num_rows();
+      $p = 1;
+  
+      while ($ds = $kt_img->fetch()) {
+          $code_pics = $oClass->id_encode($ds['id']);
+          $code_act = "'" . $code_pics . "'";
+  
+          $module = "'donhangroi'";
+          $action_delete = "'delete_img'";
+          if ($p % 4 == 0) {
+              $ds['fix'] = ' fix';
+          }
+  
+          $img .= '
+          <li  id="pics_' . $code_pics . '"  class="' . $ds['fix'] . '">
+                
+                      <a class="colorbox group1" style="cursor:zoom-in" href="data/upload/images/' . $ds['file_name'] . '" >
+                          <img class="img-responsive" src="data/upload/images/' . $ds['file_name'] . '">
+                      </a>
+                 
+                  
+          </li>
+      ';
+  
+          $p++;
+      }
+      if ($total_img > 0) {
+          $hinhanh = '<tr>
+              <td colspan="2">
+              
+              <div class="demo-gallery">
+                  <ul class="picslist "  >
+                   
+                  ' . $img . '
+                  
+                  </ul>
+              </div>
+                 
+              </td>
+          </tr>';
+      }
 
 
 
@@ -45,6 +87,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])) {
             <div class="info">
                 <form>
                 <table class="table-input">
+                <thead>
+                    <tr class="title-table">
+                    <th colspan="2">Thông tin khách hàng</th>
+                    </tr>
+                </thead>
                 <tbody>
                    <tr>
                    
@@ -89,84 +136,138 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])) {
                         <td><input type="text" value="' . $rs['masothue'] . '"  readonly></td>
                     
                     </tr>
-                    <tr>
                     
-                        <td class="td-first"><label for="">Loại hàng: </label></td>
-                        <td><input type="text" value="' . $rs['loaihang'] . '"  readonly></td>
                    
-                    </tr>
-                    <tr>
-                    
-                        <td class="td-first"><label for="">Chi tiết loại hàng: </label></td>
-                        <td><input type="text" value="' . $list_mathang . '"  readonly></td>
                    
-                    </tr>
-                    <tr>
-                    
-                        <td class="td-first"><label for="">Địa chỉ lấy hàng: </label></td>
-                        <td><input type="text" value="' . $rs['diachi_nhanhang'] . '"  readonly></td>
-               
-                    </tr>
-                    <tr>
-                    
-                        <td class="td-first"><label for="">Thời gian lấy hàng: </label></td>
-                        <td><input type="text" value="' . $rs['thoigian_nhanhang'] . '"  readonly></td>
-               
-                    </tr>
-                    <tr>
-                    
-                        <td class="td-first"><label for="">Tên người nhận hàng: </label></td>
-                        <td><input type="text" value="' . $rs['ten_nguoinhan'] . '"  readonly></td>
-                    
-                    </tr>
-                    <tr>
-                    
-                        <td class="td-first"><label for="">CMND người nhận: </label></td>
-                        <td><input type="text" value="' . $rs['cmnd_nguoinhan'] . '"  readonly></td>
-                    
-                    </tr>
-                    <tr>
-                    
-                        <td class="td-first"><label for="">Số điện thoại người nhận: </label></td>
-                        <td><input type="text" value="' . $rs['phone_nguoinhan'] . '"  readonly></td>
-                    
-                    </tr>
-                    <tr>
-                    
-                        <td class="td-first"><label for="">Địa chỉ giao hàng: </label></td>
-                        <td><input type="text" value="' . $rs['diachi_giaohang'] . '"  readonly></td>
-                    
-                    </tr>
-                    <tr>
-                    
-                        <td class="td-first"><label for="">Hình thức thanh toán: </label></td>
-                        <td><input type="text" value="' . $rs['hinhthucthanhtoan'] . '"  readonly></td>                 
-                    </tr>
-                    <tr>
-                    
-                        <td class="td-first"><label for="">Phí vận chuyển: </label></td>
-                        <td><input type="text" value="' . $rs['phivanchuyen'] . '"  readonly></td>
-                    
-                    </tr>
-                    <tr>
-                    
-                        <td class="td-first"><label for="">Tài xế vận chuyển: </label></td>
-                        <td><input type="text" value="' . $rs_taixe['name_taixe'] . '"  readonly></td>
-                    
-                    </tr>
-                    <tr>
-                    
-                        <td class="td-first"><label for="">Biển số xe vận chuyển: </label></td>
-                        <td><input type="text" value="' . $rs_doixe['biensoxe'] . '"  readonly></td>
-                    
-                    </tr>
-                    <tr>
-                    
-                        <td class="td-first"><label for="">Tên người phụ xe: </label></td>
-                        <td><input type="text" value="' . $rs_phuxe['name'] . '"  readonly></td>
-                    
-                    </tr>
                     </tbody>
+                    </table>
+                    <table class="table-input">
+                        <thead>
+                            <tr class="title-table">
+                            <th colspan="2">Thông tin giao nhận</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                    
+                            <td class="td-first"><label for="">Loại hàng: </label></td>
+                            <td><input type="text" value="' . $rs['loaihang'] . '"  readonly></td>
+                   
+                        </tr>
+                        <tr>
+                        
+                            <td class="td-first"><label for="">Chi tiết loại hàng: </label></td>
+                            <td><input type="text" value="' . $list_mathang . '"  readonly></td>
+                    
+                        </tr>
+                        <tr>
+                        
+                            <td class="td-first"><label for="">Địa chỉ lấy hàng: </label></td>
+                            <td><input type="text" value="' . $rs['diachi_nhanhang'] . '"  readonly></td>
+                
+                        </tr>
+                        <tr>
+                        
+                            <td class="td-first"><label for="">Thời gian lấy hàng: </label></td>
+                            <td><input type="text" value="' . $rs['thoigian_nhanhang'] . '"  readonly></td>
+                
+                        </tr>
+                        <tr>
+                        
+                            <td class="td-first"><label for="">Tên người nhận hàng: </label></td>
+                            <td><input type="text" value="' . $rs['ten_nguoinhan'] . '"  readonly></td>
+                        
+                        </tr>
+                       
+                        <tr>
+                        
+                            <td class="td-first"><label for="">Số điện thoại người nhận: </label></td>
+                            <td><input type="text" value="' . $rs['phone_nguoinhan'] . '"  readonly></td>
+                        
+                        </tr>
+                        <tr>
+                        
+                            <td class="td-first"><label for="">Địa chỉ giao hàng: </label></td>
+                            <td><input type="text" value="' . $rs['diachi_giaohang'] . '"  readonly></td>
+                        
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table class="table-input">
+                        <thead>
+                            <tr class="title-table">
+                            <th colspan="2">Thông tin thu phí</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                    
+                            <td class="td-first"><label for="">Hình thức thanh toán: </label></td>
+                            <td><input type="text" value="' . $rs['hinhthucthanhtoan'] . '"  readonly></td>                 
+                        </tr>
+                        <tr>
+                        
+                            <td class="td-first"><label for="">Phí vận chuyển: </label></td>
+                            <td><input type="text" value="' . $rs['phivanchuyen'] . '"  readonly></td>
+                        
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table class="table-input">
+                        <thead>
+                            <tr class="title-table">
+                            <th colspan="2">Thông tin người thực nhận</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                        
+                            <td class="td-first"><label for="">Tên người nhận hàng: </label></td>
+                            <td><input type="text" value="' . $rs['ten_nguoinhan'] . '"  readonly></td>
+                        
+                        </tr>
+                       
+                        <tr>
+                        
+                            <td class="td-first"><label for="">Số điện thoại người nhận: </label></td>
+                            <td><input type="text" value="' . $rs['phone_nguoinhan'] . '"  readonly></td>
+                        
+                        </tr>
+                        <tr>
+                        
+                            <td class="td-first"><label for="">CMND: </label></td>
+                            <td><input type="text" value="' . $rs['cmnd_nguoinhan'] . '"  readonly></td>
+                        
+                        </tr>
+                        ' . $hinhanh . '
+                        </tbody>
+                    </table>
+                    <table class="table-input">
+                        <thead>
+                            <tr class="title-table">
+                            <th colspan="2">Thông tin người phụ trách</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                    
+                            <td class="td-first"><label for="">Tài xế vận chuyển: </label></td>
+                            <td><input type="text" value="' . $rs_taixe['name_taixe'] . '"  readonly></td>
+                    
+                        </tr>
+                        <tr>
+                        
+                            <td class="td-first"><label for="">Biển số xe vận chuyển: </label></td>
+                            <td><input type="text" value="' . $rs_doixe['biensoxe'] . '"  readonly></td>
+                        
+                        </tr>
+                        <tr>
+                        
+                            <td class="td-first"><label for="">Tên người phụ xe: </label></td>
+                            <td><input type="text" value="' . $rs_phuxe['name'] . '"  readonly></td>
+                        
+                        </tr>
+                        </tbody>
                     </table>
                     </form>
                 </div>

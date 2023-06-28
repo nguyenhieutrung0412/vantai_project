@@ -20,7 +20,7 @@ function checkLogin() {
 
     $.ajax({
         type: "POST",
-        url: "login/login",
+        url: "ajax/login",
         data: form_data,
         cache: false,
         dataType: "json",
@@ -29,6 +29,7 @@ function checkLogin() {
         },
         success: function(rs) {
             if (rs['status'] == 1) {
+                alert(rs['msg']);
                 location.href = rs['link'];
                 $(".msg-error").html(rs['msg']);
             }

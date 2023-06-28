@@ -2,6 +2,18 @@
 
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $id_congnohangtrongoi =0 ;
+    if(isset($_POST['id_congnohangtrongoi']))
+    {
+        $id_congnohangtrongoi = $oClass->id_decode($_POST['id_congnohangtrongoi']);
+    }
+    $id_congnohangroi =0 ;
+    if(isset($_POST['id_congnohangroi']))
+    {
+        $id_congnohangroi = $oClass->id_decode($_POST['id_congnohangroi']);
+    }
+     //Đổi tiền tệ
+   $so_tien = $oClass->DoiSoTien(htmlspecialchars(trim($_REQUEST['sotien_thu'])));
    $data = array(
     'loai_thu'=>htmlspecialchars(trim($_REQUEST['loai_thu'])),
     'name_nguoithu'=>htmlspecialchars(trim($_REQUEST['name_nguoithu'])),
@@ -11,12 +23,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     'ngaytao_phieuthu' => date("Y-m-d"),
     'thang' => date("m"),
     'nam' => date("Y"),
-    'sotien_thu' => htmlspecialchars(trim($_REQUEST['sotien_thu'])),
+    'sotien_thu' =>  $so_tien,
     'sotien_bangchu' => htmlspecialchars(trim($_REQUEST['sotien_bangchu'])),
     'noidung_thu' => htmlspecialchars(trim($_REQUEST['noidung_thu'])),
     'tennguoitao_thu' => $_SESSION['name'],
 
-    'active' => 0
+    'active' => 0,
+    'id_congnohangtrongoi' =>  $id_congnohangtrongoi,
+    'id_congnohangroi' =>  $id_congnohangroi,
+    
     
    );
  

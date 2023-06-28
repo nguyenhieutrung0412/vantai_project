@@ -11,7 +11,7 @@
                         <p> Báo cáo</p>
                 </div>
             </div>
-            <div class="table">
+            <div class="table table_scroll">
             
                 <div class="first-table">
 
@@ -28,9 +28,11 @@
                     <thead>
                         <tr  class="title-table">
                             <th>Tháng năm</th>
-                            <th>Tổng các loại chi</th>                          
-                            <th>Tổng các loại thu</th>
-                            <th>Tổng lương nhân sự</th>
+                            <th>Chi phí hoạt động</th>                          
+                            <th>Doanh thu</th>
+                            <th>Lương nhân sự</th>
+                            <th>Lương tài xế</th>
+                            <th>Lợi nhuận</th>
                            
                         </tr>
 
@@ -42,6 +44,8 @@
                     <td class="color-0">Tổng: {str.tong_tien_chi_cua_nam} </td>
                     <td class="color-0">Tổng: {str.tong_tien_thu_cua_nam} </td>
                     <td class="color-0">Tổng: {str.tong_luong_cua_nam} </td>  
+                    <td class="color-0">Tổng: {str.tong_tien_luongtaixe_cua_nam} </td>  
+                    <td class="color-0">Tổng: {str.tongtienloinhuancuanam} </td>  
                     
                 </tr>
                     </tbody>

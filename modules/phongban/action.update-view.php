@@ -21,13 +21,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
     if($total==1){
         $str = '
         <div class="pop-up">
-            <h3>Update</h3>
+        <span class="close_pop">×</span>
+            <h3>Cập nhật phòng ban</h3>
             <form name="frmUpdatePhongBan" id="frmUpdatePhongBan" method="post" onsubmit = "return _edit('.$module.','.$update.','.$frm.',1)"  enctype="multipart/form-data">
                 
                 <table class="table-input">
                     <tbody>
                         <tr>
-                            <td class="td-first">Họ và tên</td>
+                            <td class="td-first">Tên phòng ban *</td>
                             <td> <input type="text" name="name"  placeholder="Name" value="'.$rs['chuc_vu'].'" required></td>
                         </tr>
                     </tbody>
@@ -36,11 +37,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
                 <input type="hidden" name="id" value="'.$rs['id_security'].'">
                 <div class="btn-submit">
                     
-                    <button type="submit" class="submit">Update</button>
+                    <button type="submit" class="submit">Cập nhật</button>
                     <button type="reset" onclick="return cancel()" class="cancel">Đóng</button>
                 </div>
             </form>
-        
+            <script type="text/javascript" src="template/Default/js/main_load.js"></script>
         </div>';
         die(json_encode(
             array(

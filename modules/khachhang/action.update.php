@@ -9,12 +9,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   
     'phone_kh'=>htmlspecialchars(trim($_REQUEST['phone'])),
     'address_kh'=>htmlspecialchars(trim($_REQUEST['address'])),
-    'email_kh'=>htmlspecialchars(trim($_REQUEST['email'])),
+
     'ten_congty'=>htmlspecialchars(trim($_REQUEST['ten_congty'])),
     'masothue'=>htmlspecialchars(trim($_REQUEST['masothue'])),
-    'cmnd'=>htmlspecialchars(trim($_REQUEST['cmnd'])),
-    'pwd'=>htmlspecialchars(trim($_REQUEST['password'])),
-    'pwd2'=>htmlspecialchars(trim($_REQUEST['password'])),
+  
+    'pwd'=>htmlspecialchars(trim($_REQUEST['phone'])),
+    'pwd2'=>htmlspecialchars(trim($_REQUEST['phone'])),
     
    );
    if($data['pwd'] == ""){

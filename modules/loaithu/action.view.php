@@ -55,7 +55,7 @@ while($rs = $loai_thu->fetch()){
 	}
 
 	// format tien te
-	$rs['hanmucthu'] = number_format($rs['hanmucthu'], 0, ',', '.') . "VND";
+	$rs['hanmucthu'] = number_format($rs['hanmucthu'], 0, ',', '.') ;
 	if($rs['hanmucthu'] == 0){
 		$rs['hanmucthu'] = ' không giới hạn';
 	}

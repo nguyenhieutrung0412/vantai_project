@@ -14,7 +14,7 @@
                     </a>
                 </div>
             </div>
-            <div class="table">
+            <div class="table table_scroll">
                 
                 <div class="first-table">
 
@@ -47,32 +47,40 @@
                             </div>    
                             <div class="bottom-timeline">
                                 <div class="line {detail.check-1}">
+                                <a class="btn-timeline"  onclick="return add_view_timeline('donhang','timeline-donhangtrongoi-view','{detail.id_security}','xuatben')">
                                     <div class="circle-box {detail.check-1}">
                                         <div class="caption" data-caption="CHÚ THÍCH TRÊN CỦA BẠN">
                                             Xuất bến
                                         </div>
                                     </div>
+                                </a>
                                 </div>
                                 <div class="line {detail.check-2}">
+                                <a class="btn-timeline"  onclick="return add_view_timeline('donhang','timeline-donhangtrongoi-view','{detail.id_security}','danggiao')">
                                     <div class="circle-box {detail.check-2}">
                                         <div class="caption" data-caption="CHÚ THÍCH TRÊN CỦA BẠN">
                                            Đang giao
                                         </div>
                                     </div>
+                                </a>
                                 </div>
                                 <div class="line {detail.check-3}">
+                                 <a class="btn-timeline"  onclick="return add_view_timeline('donhang','timeline-donhangtrongoi-view','{detail.id_security}','giaohangtoidiachi')">
                                     <div class="circle-box {detail.check-3}">
                                         <div class="caption" data-caption="CHÚ THÍCH TRÊN CỦA BẠN">
                                             Giao hàng tới địa chỉ
                                         </div>
                                     </div>
+                                </a>
                                 </div>
                                 <div class="line {detail.check-4}">
+                                <a class="btn-timeline"  onclick="return add_view_timeline('donhang','timeline-donhangtrongoi-view','{detail.id_security}','hoanthanh')">
                                     <div class="circle-box {detail.check-4}">
                                         <div class="caption" data-caption="CHÚ THÍCH TRÊN CỦA BẠN">
                                             Hoàn thành
                                         </div>
                                     </div>
+                                    </a>
                                 </div>
 
                             </div>
@@ -108,6 +116,9 @@
 </div>
 
 <div class="popup-create">
+        
+</div>
+<div class="popup-timeline">
         
 </div>
 

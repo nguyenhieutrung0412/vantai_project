@@ -46,6 +46,11 @@ class ClassModel extends MasterModel{
 		}
 		return $count;
 	}
-	
+	function DoiSoTien($str)
+	{
+		$str = str_replace(",", "", $str);
+		$str = str_replace(".", "", $str);
+		return $str;
+	}
 	
 }

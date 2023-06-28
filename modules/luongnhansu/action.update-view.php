@@ -19,19 +19,20 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
       
         $str = '
         <div class="pop-up">
-        <h3>Update</h3>
+        <span class="close_pop">×</span>
+        <h3>Cập nhật lương nhân sự</h3>
          <form name="frmUpdateluongnhansu" id="frmUpdateluongnhansu" method="post" onsubmit = "return _edit('.$module.','.$update.','.$frm.','.$img_file.')"  enctype="multipart/form-data">
             
          <table class="table-input">
          <tbody>
             <tr>
-                <td class="td-first">Tiền bảo hiểm</td>
+                <td class="td-first">Tiền bảo hiểm *</td>
                 
                     <td><input type="text"  name="tien_bao_hiem"  placeholder="tiền bảo hiểm" value="'.$rs['tien_bao_hiem'].'"  required></td>
                
             </tr>
             <tr>
-                <td class="td-first">Phụ cấp</td>
+                <td class="td-first">Phụ cấp *</td>
                 <td><input type="text"  name="phu_cap"  placeholder="phụ cấp" value="'.$rs['phu_cap'].'"  required></td>
             </tr>
            
@@ -40,11 +41,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
                 <input type="hidden" name="id" value="'.$rs['id_security'].'">
                 <div class="btn-submit">
                     
-                    <button type="submit" class="submit">Update</button>
+                    <button type="submit" class="submit">Cập nhật</button>
                     <button type="reset" onclick="return cancel()" class="cancel">Đóng</button>
                 </div>
             </form>
-                  
+            <script type="text/javascript" src="template/Default/js/main_load.js"></script>
             </div>
         ';
         die(json_encode(

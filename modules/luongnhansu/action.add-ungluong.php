@@ -8,7 +8,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $date = explode('/',$_REQUEST['date_ung']);
                 $data = array(
                 'user_id'=>htmlspecialchars($_REQUEST['user_id']),
-                'so_tien_ung' =>htmlspecialchars($_REQUEST['so_tien_ung']),
+                'so_tien_ung' =>$oClass->DoiSoTien(htmlspecialchars($_REQUEST['so_tien_ung'])),
                 'noidung_ung' =>htmlspecialchars($_REQUEST['noidung_ung']),
                 'ngay' => $date[0],
                 'thang' =>$rs['thang'],

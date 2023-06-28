@@ -57,6 +57,7 @@ class ClassModel extends MasterModel
 		$str = str_replace(".", "", $str);
 		return $str;
 	}
+	
 	//hàm chuyển đổi tiền sang chữ
 	function jam_read_num_forvietnamese($num = false)
 	{
@@ -91,118 +92,213 @@ class ClassModel extends MasterModel
 		}
 		return ($str . ' đ');
 	}
-	function convert_number_to_words($number)
-	{
-
+	function convert_number_to_words($number) {
 		$hyphen      = ' ';
-		$conjunction = ' ';
+		$conjunction = '  ';
 		$separator   = ' ';
 		$negative    = 'âm ';
 		$decimal     = ' phẩy ';
-		$one		 = 'mốt';
-		$ten         = 'lẻ';
 		$dictionary  = array(
-			0                   => 'Không',
-			1                   => 'Một',
-			2                   => 'Hai',
-			3                   => 'Ba',
-			4                   => 'Bốn',
-			5                   => 'Năm',
-			6                   => 'Sáu',
-			7                   => 'Bảy',
-			8                   => 'Tám',
-			9                   => 'Chín',
-			10                  => 'Mười',
-			11                  => 'Mười một',
-			12                  => 'Mười hai',
-			13                  => 'Mười ba',
-			14                  => 'Mười bốn',
-			15                  => 'Mười lăm',
-			16                  => 'Mười sáu',
-			17                  => 'Mười bảy',
-			18                  => 'Mười tám',
-			19                  => 'Mười chín',
-			20                  => 'Hai mươi',
-			30                  => 'Ba mươi',
-			40                  => 'Bốn mươi',
-			50                  => 'Năm mươi',
-			60                  => 'Sáu mươi',
-			70                  => 'Bảy mươi',
-			80                  => 'Tám mươi',
-			90                  => 'Chín mươi',
-			100                 => 'trăm',
-			1000                => 'ngàn',
-			1000000             => 'triệu',
-			1000000000          => 'tỷ',
-			1000000000000       => 'nghìn tỷ',
-			1000000000000000    => 'ngàn triệu triệu',
-			1000000000000000000 => 'tỷ tỷ'
+		0                   => 'không',
+		1                   => 'một',
+		2                   => 'hai',
+		3                   => 'ba',
+		4                   => 'bốn',
+		5                   => 'năm',
+		6                   => 'sáu',
+		7                   => 'bảy',
+		8                   => 'tám',
+		9                   => 'chín',
+		10                  => 'mười',
+		11                  => 'mười một',
+		12                  => 'mười hai',
+		13                  => 'mười ba',
+		14                  => 'mười bốn',
+		15                  => 'mười năm',
+		16                  => 'mười sáu',
+		17                  => 'mười bảy',
+		18                  => 'mười tám',
+		19                  => 'mười chín',
+		20                  => 'hai mươi',
+		30                  => 'ba mươi',
+		40                  => 'bốn mươi',
+		50                  => 'năm mươi',
+		60                  => 'sáu mươi',
+		70                  => 'bảy mươi',
+		80                  => 'tám mươi',
+		90                  => 'chín mươi',
+		100                 => 'trăm',
+		1000                => 'nghìn',
+		1000000             => 'triệu',
+		1000000000          => 'tỷ',
+		1000000000000       => 'nghìn tỷ',
+		1000000000000000    => 'nghìn triệu triệu',
+		1000000000000000000 => 'tỷ tỷ'
 		);
-
-		if (!is_numeric($number)) {
-			return false;
-		}
-
-		// if (($number >= 0 && (int) $number < 0) || (int) $number < 0 - PHP_INT_MAX) {
-		// 	// overflow
-		// 	trigger_error(
-		// 	'convert_number_to_words only accepts numbers between -' . PHP_INT_MAX . ' and ' . PHP_INT_MAX,
-		// 	E_USER_WARNING
-		// 	);
-		// 	return false;
-		// }
-
-		if ($number < 0) {
-			return $negative . $this->convert_number_to_words(abs($number));
-		}
-
-		$string = $fraction = null;
-
+	if (!is_numeric($number)) {
+		return false;
+	}
+	if (($number >= 0 && (int) $number < 0) || (int) $number < 0 - PHP_INT_MAX) {
+		// overflow
+		trigger_error(
+		'convert_number_to_words only accepts numbers between -' . PHP_INT_MAX . ' and ' . PHP_INT_MAX,
+		E_USER_WARNING
+		);
+		return false;
+	}
+	if ($number < 0) {
+		return $negative . $this->convert_number_to_words(abs($number));
+	}
+	$string = $fraction = null;
 		if (strpos($number, '.') !== false) {
-			list($number, $fraction) = explode('.', $number);
+		list($number, $fraction) = explode('.', $number);
+	}
+	switch (true) {
+	case $number < 21:
+		$string = $dictionary[$number];
+	break;
+	case $number < 100:
+		$tens   = ((int) ($number / 10)) * 10;
+		$units  = $number % 10;
+		$string = $dictionary[$tens];
+		if ($units) {
+			$string .= $hyphen . $dictionary[$units];
 		}
-
-		switch (true) {
-			case $number < 21:
-				$string = $dictionary[$number];
-				break;
-			case $number < 100:
-				$tens   = ((int) ($number / 10)) * 10;
-				$units  = $number % 10;
-				$string = $dictionary[$tens];
-				if ($units) {
-					$string .= strtolower($hyphen . ($units == 1 ? $one : $dictionary[$units]));
-				}
-				break;
-			case $number < 1000:
-				$hundreds  = $number / 100;
-				$remainder = $number % 100;
-				$string = $dictionary[$hundreds] . ' ' . $dictionary[100];
-				if ($remainder) {
-					$string .= strtolower($conjunction . ($remainder < 10 ? $ten . $hyphen : null) . $this->convert_number_to_words($remainder));
-				}
-				break;
-			default:
-				$baseUnit = pow(1000, floor(log($number, 1000)));
-				$numBaseUnits = (int) ($number / $baseUnit);
-				$remainder = $number - ($numBaseUnits * $baseUnit);
-				$string = $this->convert_number_to_words($numBaseUnits) . ' ' . $dictionary[$baseUnit];
-				if ($remainder) {
-					$string .= strtolower($remainder < 100 ? $conjunction : $separator);
-					$string .= strtolower($this->convert_number_to_words($remainder));
-				}
-				break;
+	break;
+	case $number < 1000:
+		$hundreds  = $number / 100;
+		$remainder = $number % 100;
+		$string = $dictionary[$hundreds] . ' ' . $dictionary[100];
+		if ($remainder) {
+			$string .= $conjunction . $this->convert_number_to_words($remainder);
 		}
+	break;
+	default:
+		$baseUnit = pow(1000, floor(log($number, 1000)));
+		$numBaseUnits = (int) ($number / $baseUnit);
+		$remainder = $number % $baseUnit;
+		$string = $this->convert_number_to_words($numBaseUnits) . ' ' . $dictionary[$baseUnit];
+		if ($remainder) {
+			$string .= $remainder < 100 ? $conjunction : $separator;
+			$string .= $this->convert_number_to_words($remainder);
+		}
+		break;
+	}
+	if (null !== $fraction && is_numeric($fraction)) {
+		$string .= $decimal;
+		$words = array();
+		foreach (str_split((string) $fraction) as $number) {
+			$words[] = $dictionary[$number];
+		}
+		$string .= implode(' ', $words);
+	}
+		return $string;
+}
+	function getExtension($str){
+		$i = strrpos($str,".");
+		if (!$i) { return ""; }
+		$l = strlen($str) - $i;
+		$ext = substr($str,$i+1,$l);
+		$ext = substr($str,$i+1,$l);
+		$ext = strtolower($ext);
+		return $ext;
+	}
+	function upload_images($type, $lastid, $chatluonghinh = 75)
+	{
+		//upload nhieu hinh anh vao thu muc
+		$arr_img_type = ["jpg", "jpeg", "png"];
 
-		if (null !== $fraction && is_numeric($fraction)) {
-			$string .= $decimal;
-			$words = array();
-			foreach (str_split((string) $fraction) as $number) {
-				$words[] = $dictionary[$number];
+		$count_img = count(array_filter($_FILES['img_file']['name']));
+		if ($count_img > 0) {
+			foreach ($_FILES['img_file']['name'] as $name => $value) {
+				$name_img = stripslashes($_FILES['img_file']['name'][$name]);
+				$source_img = $_FILES['img_file']['tmp_name'][$name];
+				$size = filesize($_FILES['img_file']['tmp_name'][$name]);
+
+				$name_src = time() . '_' . $lastid . '_' . str2url($name_img);
+				// $icon[] = "('php_vandon','".$lastid."','".$name_src."')";
+
+				$path_img = "data/upload/images/" . $name_src;
+
+				if ($size > 1024000) { //10MB
+					die(json_encode(array(
+						'status' => 2,
+						'msg' => '(2) Hình ảnh phải nhỏ hơn 10MB (<10MB)'
+					)));
+				}
+
+				$extension = getExtension($name_img);
+				$extension = strtolower($extension);
+
+				if (!in_array($extension, $arr_img_type)) {
+					die(json_encode(array(
+						'status' => 3,
+						'msg' => '(3) Hình ảnh phải là định dạng: .jpg, .jpeg, .png'
+					)));
+				}
+
+				if ($extension == "jpg" || $extension == "jpeg") {
+					$src = imagecreatefromjpeg($source_img);
+				}
+				if ($extension == "png") {
+					$src = imagecreatefrompng($source_img);
+				}
+
+				list($width, $height) = getimagesize($source_img);
+
+				$newwidth = $width;
+				if ($width > 1024) {
+					$newwidth = 1024;
+				}
+				$newheight = ($height / $width) * $newwidth;
+				$tmp = imagecreatetruecolor($newwidth, $newheight);
+
+				imagecopyresampled($tmp, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+
+				$filename = $path_img;
+				@chmod($filename, 0777);
+				imagejpeg($tmp, $filename, $chatluonghinh);
+
+				imagedestroy($src);
+				imagedestroy($tmp);
+				$this->db->query("INSERT INTO php_images(`type`,`type_id`,`file_name`,`file_type`) VALUES ('" . $type . "','" . $lastid . "','" . $name_src . "','" . $extension . "')");
 			}
-			$string .= implode(' ', $words);
-		}
+			// $icon_arr = implode(",",$icon);
 
-		return utf8_decode($string);
+		}
+	}
+	function upload_files($type,$lastid){
+		//update nhiều file vào thư mục
+		$ext_file = array('pdf','doc','docx','xls','xlsx'); 
+		$count_file = count($_FILES["pdf_file"]['name']);
+		
+		if($count_file > 0){
+			for($i=0;$i<$count_file;$i++){
+			
+				$tmpFilePath = $_FILES['pdf_file']['tmp_name'][$i];
+				$ext = getExtension($_FILES["pdf_file"]['name'][$i]);
+				
+				if($tmpFilePath != "" && in_array($ext,$ext_file)){
+					$file = time().'-'.$lastid.'-'.str2url($_FILES['pdf_file']['name'][$i]);
+					$newFilePath = "data/upload/files/" . $file;
+					move_uploaded_file($tmpFilePath, $newFilePath);
+					
+					//insert data file
+					//$title = $_FILES["pdf_file"]['name'][$i];
+					//$file_name = $file;
+					$file_type = $ext;
+					
+					$this->db->query("INSERT php_file (`type`,`type_id`,`file_name`,`file_type`) VALUES ('$type','$lastid','$file','$file_type')");
+				}
+			}
+		}//END.upload file
+	}
+	function truncateString($str, $maxChars = 40, $holder = "...")
+	{
+		if (strlen($str) > $maxChars) {
+			return trim(substr($str, 0, $maxChars)) . $holder;
+		} else {
+			return $str;
+		}
 	}
 }

@@ -16,7 +16,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             <tbody>
                 <tr>
                     <td class="td-first">Số tiền thưởng nóng</td>
-                    <td><input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  name="thuongnong" value="'.$rs['thuong_nong'].'"   placeholder="Số tiền(200000)" required></td>
+                    <td><input type="text"  name="thuongnong" value="'.$rs['thuong_nong'].'"   placeholder="Số tiền(200000)" required></td>
                 </tr>
                 
                 <tr>

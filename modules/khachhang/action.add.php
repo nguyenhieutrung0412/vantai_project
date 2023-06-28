@@ -10,12 +10,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     'name_kh'=>htmlspecialchars(trim($_REQUEST['name'])),
     'phone_kh'=>htmlspecialchars(trim($_REQUEST['phone'])),
     'address_kh'=>htmlspecialchars(trim($_REQUEST['address'])),
-    'email_kh'=>htmlspecialchars(trim($_REQUEST['email'])),
+    
+   
     'ten_congty'=>htmlspecialchars(trim($_REQUEST['ten_congty'])),
     'masothue'=>htmlspecialchars(trim($_REQUEST['masothue'])),
-    'cmnd'=>htmlspecialchars(trim($_REQUEST['cmnd'])),
-    'pwd'=>htmlspecialchars(md5(trim($_REQUEST['password']))),
-    'pwd2'=>htmlspecialchars(trim($_REQUEST['password'])),
+ 
+    'pwd'=>htmlspecialchars(md5(trim($_REQUEST['phone']))),
+    'pwd2'=>htmlspecialchars(trim($_REQUEST['phone'])),
     'active'=> 1
    );
    $result = $oContent->view_table("php_khachhang", "`phone_kh`=".$data['phone_kh']." LIMIT 1");

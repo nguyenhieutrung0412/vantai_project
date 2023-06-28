@@ -16,38 +16,41 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
     $module = "'nhan-su'";
     $update = "'update'";
     $frm = "'frmUpdateNhanSu'";
+    $rs['luong_nhansu'] = number_format($rs['luong_nhansu'], 0, ',', '.') . "";
+	$rs['phu_cap'] = number_format($rs['phu_cap'], 0, ',', '.') . "";
     $rs['id_security'] = $oClass->id_encode($rs['id']);
 
     if($total==1){
         $str = '
         <div class="pop-up">
-            <h3>Update</h3>
+        <span class="close_pop">×</span>
+            <h3>Cập nhật nhân sự</h3>
             <form name="frmUpdateNhanSu" id="frmUpdateNhanSu" method="post" onsubmit = "return _edit('.$module.','.$update.','.$frm.',1)"  enctype="multipart/form-data">
                 
             <table class="table-input">
             <tbody>
                 <tr>
-                    <td class="td-first">Họ và tên</td>
+                    <td class="td-first">Họ và tên *</td>
                     <td> <input type="text" name="name"  placeholder="Name" value="'.$rs['name'].'" required></td>
                 </tr>
                 <tr>
-                    <td class="td-first">Ngày tháng năm sinh</td>
+                    <td class="td-first">Ngày tháng năm sinh *</td>
                     <td> <input type="date" name="dateofbirth"  placeholder="Ngày tháng năm sinh" value="'.$rs['dateofbirth'].'" required></td>
                 </tr>
                  <tr>
-                    <td class="td-first">Địa chỉ</td>
+                    <td class="td-first">Địa chỉ *</td>
                     <td> <input type="text" name="diachi"  placeholder="Địa chỉ" value="'.$rs['diachi'].'" required></td>
                 </tr>
                  <tr>
-                    <td class="td-first">CMND</td>
+                    <td class="td-first">CMND *</td>
                     <td> <input type="text" name="cmnd"  placeholder="CMND" value="'.$rs['cmnd'].'" required></td>
                 </tr>
                 <tr>
-                    <td class="td-first">Số điện thoại</td>
+                    <td class="td-first">Số điện thoại *</td>
                     <td>   <input type="tel" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="10" name="phone" value="'.$rs['phone'].'"  placeholder="Số điện thoại" required></td>
                 </tr>
                 <tr>
-                    <td class="td-first">Chức vụ</td>
+                    <td class="td-first">Chức vụ *</td>
                     <td>
                         <input list="list_chucvu" name="list_chucvu" value="'.$rs['position'].'">
                         <datalist id="list_chucvu">
@@ -58,24 +61,28 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
                     </td>
                 </tr>
                 <tr>
-                    <td class="td-first">Ngày vào làm</td>
+                    <td class="td-first">Ngày vào làm *</td>
                     <td> <input type="date" name="dateofcompany"  placeholder="Ngày vào làm" value="'.$rs['dateofcompany'].'" required></td>
                 </tr>
                 <tr>
-                    <td class="td-first">Tiền lương</td>
+                    <td class="td-first">Tiền lương *</td>
                     <td> <input type="text" name="luong" onchange="return formatTienTe(this.value)" placeholder="Tiền lương"value="'.$rs['luong_nhansu'].'" required></td>
                 </tr>
                 <tr>
-                    <td class="td-first">Phụ cấp</td>
+                    <td class="td-first">Phụ cấp *</td>
                     <td> <input type="text" name="phu_cap" onchange="return formatTienTe(this.value)" placeholder="Phụ cấp"value="'.$rs['phu_cap'].'" required></td>
                 </tr>
                 <tr>
+                <td class="td-first">Bảo hiểm xã hội *</td>
+                <td> <input type="text" name="tien_baohiem" placeholder="Nhập số tiền đóng bảo hiểm "value="'.$rs['tien_baohiem'].'" required></td>
+            </tr>
+                <tr>
                     <td class="td-first">Số tài khoản</td>
-                    <td> <input type="text" name="stk"  placeholder="Số tài khoản"value="'.$rs['stk'].'" required></td>
+                    <td> <input type="text" name="stk"  placeholder="Số tài khoản"value="'.$rs['stk'].'" ></td>
                 </tr>
                 <tr>
                     <td class="td-first">Tên ngân hàng</td>
-                    <td> <input type="text" name="ngan_hang"  placeholder="VD: VCB,MB..."value="'.$rs['ngan_hang'].'" required></td>
+                    <td> <input type="text" name="ngan_hang"  placeholder="VD: VCB,MB..."value="'.$rs['ngan_hang'].'" ></td>
                 </tr>
                 <tr>
                     <td class="td-first">Mật khẩu</td>
@@ -86,11 +93,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
                 <input type="hidden" name="id" value="'.$rs['id_security'].'">
                 <div class="btn-submit">
                     
-                    <button type="submit" class="submit">Update</button>
+                    <button type="submit" class="submit">Cập nhật</button>
                     <button type="reset" onclick="return cancel()" class="cancel">Đóng</button>
                 </div>
             </form>
-        
+            <script type="text/javascript" src="template/Default/js/main_load.js"></script>
         </div>';
         die(json_encode(
             array(

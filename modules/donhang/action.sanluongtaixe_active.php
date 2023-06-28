@@ -12,8 +12,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])) {
                 $sanluong = $model->db->query("SELECT * FROM php_luongtaixe WHERE user_id = " . $rs['id_taixe'] . " AND thang=" . $rs['thang_hoanthanh'] . " AND nam=" . $rs['nam_hoanthanh']);
                 $rs_sanluong = $sanluong->fetch();
                 $tongsanluong = $rs_sanluong['sanluong_hoanthanh'] + $rs['phivanchuyen'];
+                $taixe = $model->db->query("SELECT * FROM php_taixe WHERE id = " . $rs['id_taixe'] );
+                $rs_taixe = $taixe->fetch();
+                $luong_chuyen = 0;
+                if($rs_taixe['luong_chuyen'] == 1)
+                {
+                    $luong_chuyen = $rs_sanluong['luong_chuyen'] + $rs['luong_chuyen'];
+                }
+              
 
-                $taixe = $model->db->query("UPDATE php_luongtaixe SET sanluong_hoanthanh = " . $tongsanluong . " WHERE user_id = " . $rs['id_taixe'] . " AND thang=" . $rs['thang_hoanthanh'] . " AND nam=" . $rs['nam_hoanthanh']);
+                $tong_luong = $rs_sanluong['tong_luong'] + $luong_chuyen;
+
+                 $model->db->query("UPDATE php_luongtaixe SET sanluong_hoanthanh = " . $tongsanluong . ", luong_chuyen = " . $luong_chuyen . ", tong_luong = " . $tong_luong . " WHERE user_id = " . $rs['id_taixe'] . " AND thang=" . $rs['thang_hoanthanh'] . " AND nam=" . $rs['nam_hoanthanh']);
                 $model->db->query("UPDATE php_donhangtrongoi  SET `sanluong` = 1 WHERE `id`= " . $id . " AND active = 1");
             } else {
                 die(json_encode(

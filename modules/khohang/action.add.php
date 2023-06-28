@@ -5,8 +5,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
    $data = array(
     'ten_kho'=>htmlspecialchars(trim($_REQUEST['ten_kho'])),
     'diachi_kho'=>htmlspecialchars(trim($_REQUEST['diachi_kho'])),
+    'truckho' => 0,
+    'active'=> 1,
 
-    'active'=> 1
    );
  
 

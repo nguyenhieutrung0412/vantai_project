@@ -91,13 +91,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
         $id_gallery = "'#lightgallery'";
         $str = '
         <div class="pop-up">
-        <h3>Update</h3>
+        <span class="close_pop">×</span>
+        <h3>Cập nhật phiếu chi</h3>
          <form name="frmUpdatephieuchi" id="frmUpdatephieuchi" method="post" onsubmit = "return _edit('.$module.','.$update.','.$frm.','.$img_file.')"  enctype="multipart/form-data">
             
          <table class="table-input">
          <tbody>
             <tr>
-                <td class="td-first">Tên loại chi</td>
+                <td class="td-first">Tên loại chi *</td>
                  <td>
                     <select name="loai_chi" id="loai_chi" >
                      <option value="'.$rs['loai_chi'].'">'.$rs2['loai_chi'].'</option>
@@ -106,27 +107,27 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
                 </td>
             </tr>
             <tr>
-                 <td class="td-first">Họ tên người nhận</td>
+                 <td class="td-first">Họ tên người nhận *</td>
                 <td><input type="text"  name="name_nguoinhan"  placeholder="Họ tên người chi" value="'.$rs['name_nguoinhan'].'"  required></td>
              </tr>
               <tr>
-                 <td class="td-first">Địa chỉ người nhận</td>
+                 <td class="td-first">Địa chỉ người nhận *</td>
                 <td><input type="text"  name="diachi_nguoinhan"  placeholder="Địa chỉ người nhận" value="'.$rs['diachi_nguoinhan'].'"  required></td>
              </tr>
               <tr>
-                 <td class="td-first">Số điện thoại người chi</td>
+                 <td class="td-first">Số điện thoại người chi *</td>
                 <td><input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  name="phone_nguoinhan" value="'.$rs['phone_nguoinhan'].'"   placeholder="Số điện thoại người nhận" required></td>
              </tr>
              <tr>
-                 <td class="td-first">Số tiền chi</td>
+                 <td class="td-first">Số tiền chi *</td>
                 <td><input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="'.$rs['sotien_chi'].'"  name="sotien_chi"  placeholder="Số tiền chi" required></td>
              </tr>
              <tr>
-             <td class="td-first">Số tiền bằng chữ</td>
+             <td class="td-first">Số tiền bằng chữ *</td>
             <td><input type="text"   name="sotien_bangchu"  placeholder="Số tiền bằng chữ" value="'.$rs['sotien_bangchu'].'"  required></td>
          </tr>
              <tr>
-                 <td class="td-first">Nội dung chi</td>
+                 <td class="td-first">Nội dung chi *</td>
                 <td><input type="text"  name="noidung_chi" value="'.$rs['noidung_chi'].'"  placeholder="Nội dung chi" required></td>
              </tr>
              <tr>
@@ -135,7 +136,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
              </tr>
              '.$hinhanh.'
              <tr>
-                <td class="td-first">Hình file đính kèm(nếu có)</td>
+                <td class="td-first">File đính kèm(nếu có)</td>
                 <td><input type="file"  name="pdf_file[]" id="pdf_file" multiple accept= ".pdf, .docx, .doc,.xls,.xlsx"></td>
             </tr>
             '.$list_file.'
@@ -147,15 +148,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
             <input type="hidden" name="id" value="'.$rs['id_security'].'">
             <div class="btn-submit">
                 
-                <button type="submit" class="submit">Update</button>
+                <button type="submit" class="submit">Cập nhật</button>
                 <button type="reset" onclick="return cancel()"  class="cancel">Đóng</button>
             </div>
         </form>
-        <script type="text/javascript">
-        $(document).ready(function(){
-            return animation_img();
-        });
-        </script>
+        <script type="text/javascript" src="template/Default/js/main_load.js"></script>
+            
     </div>
         ';
         die(json_encode(

@@ -14,9 +14,15 @@ $tpl->setfile(array(
 
 ));
 
-if (isset($_GET['code'])) {
+if (isset($_GET['code']) || isset($_GET['code_in'])  || isset($_GET['sdt_search'])) {
 	$id  = $oClass->id_decode($_GET['code']);
-
+	if (isset($_GET['code_in'])) {
+		$id_in = $_GET['code_in'];
+		$id_where = ' AND id IN (' . $id_in.')';
+	}
+	if (isset($_GET['sdt_search'])) {
+		$sdt = ' AND (phone_nguoinhan =' . $_GET['sdt_search'] .' OR sdt_nguoigui =' . $_GET['sdt_search'].')';
+	}
 	//Phân trang
 	$don_hang = $oContent->view_table('php_donhangroi_s', 'id_donhangroi = ' . $id);
 	//lấy tổng số phần tử tin 
@@ -29,7 +35,7 @@ if (isset($_GET['code'])) {
 	$dp->current = '<a class="active_page">%d</a>';
 	$tpl->assign(array('divpage' => $dp->simple(10)));
 
-	$don_hang = $oContent->view_pagination('php_donhangroi_s', "id_donhangroi = " . $id . "  GROUP BY id DESC", $start, $limit);
+	$don_hang = $oContent->view_pagination('php_donhangroi_s', "id_donhangroi = " . $id .  $id_where . $sdt. "  GROUP BY id DESC", $start, $limit);
 	$stt = 1;
 	while ($rs = $don_hang->fetch()) {
 
@@ -53,74 +59,33 @@ if (isset($_GET['code'])) {
 		$rs['stt'] = $stt;
 		//xu lý tình trạng đơn 
 
-		// if($rs['tinhtrangdon'] == 1){
-
-
-		//     $rs['check-1'] = ' line1-check';
-		// }
-		// else if($rs['tinhtrangdon'] == 2){
-		//     $rs['check-1'] = ' line1-check';
-		//     $rs['check-2'] = ' line2-check';
-		// }
-		// else if($rs['tinhtrangdon'] == 3){
-		//     $rs['check-1'] = ' line1-check';
-		//     $rs['check-2'] = ' line2-check';
-		//     $rs['check-3'] = ' line3-check';
-		// }
-
-		// else if($rs['tinhtrangdon'] == 4){
-		//     $rs['check-1'] = ' line1-check';
-		//     $rs['check-2'] = ' line2-check';
-		//     $rs['check-3'] = ' line3-check';
-		//     $rs['check-4'] = ' line4-check';
-		// }
+		
 		//Xử lý hình thức thanh toán
 		if ($rs['hinhthucthanhtoan'] == 'thanhtoantienmat') {
 			$rs['hinhthucthanhtoan_text'] = 'Tiền mặt';
 		} else if ($rs['hinhthucthanhtoan'] == 'thanhtoancongno') {
 			$rs['hinhthucthanhtoan_text'] = 'Công nợ khách hàng';
+		
+		} else if ($rs['hinhthucthanhtoan'] == 'thanhtoanchuyenkhoan') {
+			$rs['hinhthucthanhtoan_text'] = 'Chuyển khoản';
 		}
 
 
-		//Xử lý
-		if ($rs['id_taixe'] == 0) {
-			$rs['text_tinhtrangtaixe'] = 'Điều lệnh';
-			$rs['btn_taixe'] = 'order_taixe_popup';
-			$rs['btn_remove_info_taixe'] = ' remove';
-		} else if ($rs['id_taixe'] != 0) {
-			$rs['text_tinhtrangtaixe'] = 'Thông tin';
-			$rs['btn_taixe'] = 'info_taixe_popup';
-			$rs['btn_remove_order_taixe'] = ' remove';
-		}
-		//xu ly điều lệnh hoặc thông tin đội xe phụ trách đơn
-		if ($rs['id_doixe'] == 0) {
-			$rs['text_tinhtrangdoixe'] = 'Điều lệnh';
-			$rs['btn_doixe'] = 'order_doixe_popup';
-			$rs['btn_remove_info_doixe'] = ' remove';
-		} else if ($rs['id_doixe'] != 0) {
-			$rs['text_tinhtrangdoixe'] = 'Thông tin';
-			$rs['btn_doixe'] = 'info_doixe_popup';
-			$rs['btn_remove_order_doixe'] = ' remove';
-		}
-		//xu ly điều lệnh hoặc thông tin phụ xe phụ trách đơn
-		if ($rs['id_nhansu'] == 0) {
-			$rs['text_tinhtrangphuxe'] = 'Điều lệnh';
-			$rs['btn_phuxe'] = 'order_phuxe_popup';
-			$rs['btn_remove_info_phuxe'] = ' remove';
-		} else if ($rs['id_nhansu'] != 0) {
-			$rs['text_tinhtrangphuxe'] = 'Thông tin';
-			$rs['btn_phuxe'] = 'info_phuxe_popup';
-			$rs['btn_remove_order_phuxe'] = ' remove';
-		}
+		
 		// xử lý các bảng kết nối
 		// lấy thông tin khách hàng
 		$kh = $model->db->query("SELECT * FROM php_khachhang WHERE id=" . $rs['id_khachhang'] . " LIMIT 1");
 		$rs_kh = $kh->fetch();
 		$rs['name_kh'] =  $rs_kh['name_kh'];
 		$rs['sdt_kh']  = $rs_kh['phone_kh'];
-
+		//xử lý tổng tiền (pvc*vat)
+		$phivat = ($rs['phivanchuyen'] * ($rs['vat']/100));
+		$tongtien = $rs['phivanchuyen'] + ($rs['phivanchuyen'] * ($rs['vat']/100));
+		//end
 		// format tien te
-		$rs['format_luong'] = number_format($rs['phivanchuyen'], 0, ',', '.') . "VND";
+		$rs['format_luong'] = number_format($rs['phivanchuyen'], 0, ',', '.');
+		$rs['tong_tien'] = number_format($tongtien, 0, ',', '.');
+		$rs['phi_vat'] = number_format($phivat, 0, ',', '.');
 
 
 		$tpl->assign($rs, 'detail');
@@ -128,9 +93,12 @@ if (isset($_GET['code'])) {
 	}
 
 	$rs_detail_v['id'] = $id;
+	$rs_detail_v['id_security'] = $oClass->id_encode($id);
 
 	$tpl->merge($rs_detail_v, 'detail_v');
-} else {
+}
+
+else {
 	header("Location: " . $domain . "donhangroi");
 	exit;
 }

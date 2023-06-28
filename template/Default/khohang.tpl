@@ -2,18 +2,18 @@
     <div class="page">
         <div class="container">
             <div class="title">
-                <h3>Loại thu</h3>
+                <h3>Kho hàng</h3>
                 <div class="title-link">
                     <a href="">
                         <p class="active">Dashboard</p>
                     </a>
                     <a >
                         <i class="fa-solid fa-angle-right"></i>
-                        <p> Loại thu</p>
+                        <p> kho hàng</p>
                     </a>
                 </div>
             </div>
-            <div class="table">
+            <div class="table table_scroll">
                 <div class="first-table">
                     <div class="btn-new">
                         <a class="btn-create {xuly.them}"><i class="fa-solid fa-plus"></i> Tạo mới</a>
@@ -26,7 +26,11 @@
                             <th>Mã kho</th>
                             <th>Tên kho</th>
                             <th>Địa chỉ kho</th>
-                            
+                            <th>Đơn hàng đến</th>
+                            <th>Đơn hàng đi</th>
+                               <!--BOX boxadmin-phanquyen-->
+                            <th>Trực kho</th>
+                              <!--BOX boxadmin-phanquyen-->
                             <th>Active</th>                          
                             <th>Lựa chọn</th>
                         </tr>
@@ -37,6 +41,13 @@
                             <td>{detail.id}</td>
                             <td>{detail.ten_kho}</td>
                             <td>{detail.diachi_kho}</td>
+                            <td ><a class="color-0" href="khohang/donhangnhan/?code={detail.id_security}">{detail.count_khonhan} đơn hàng đến</a></td>
+                            <td ><a class="color-0" href="khohang/donhanggui/?code={detail.id_security}">{detail.count_khogui} đơn hàng đi</a></td>
+                             <!--BOX boxadmin-phanquyen-->
+                            <td class="phanquyen">
+                                <a class="btn-phanquyen" onclick="return phanquyenview('khohang',{detail.id_security})" > <i class="fa-solid fa-shield-halved icon-phanquyen"></i></a>
+                            </td>
+                            <!--BOX boxadmin-phanquyen-->
                             
                             <td class="active" ><a {detail.active}  onclick="return active_user('khohang','active','{detail.id_security}')"> <i class="fa-solid fa-circle "></i> </a></td>
                             <td class="select">
@@ -74,17 +85,18 @@
 
 <div class="popup-create">
         <div class="pop-up">
+        <span class="close_pop">×</span>
             <h3>Thêm mới</h3>
             <form autocomplete="off" name="frmAddkho" id="frmAddkho" method="post" onsubmit = "return add('khohang','add','frmAddkho',1)"  enctype="multipart/form-data">
                 
         <table class="table-input">
          <tbody>
             <tr>
-                <td class="td-first">Tên kho</td>
+                <td class="td-first">Tên kho *</td>
                  <td><input type="text" name="ten_kho"  placeholder="Tên kho" required></td>
             </tr>
              <tr>
-                 <td class="td-first">Địa chỉ kho</td>
+                 <td class="td-first">Địa chỉ kho *</td>
                 <td><input type="text"   name="diachi_kho"  placeholder="Địa chỉ kho"></td>
              </tr>
             
@@ -102,5 +114,8 @@
 </div>
 
 <div class="popup-update">    
+</div>
+<div class="popup-phanquyen">
+    
 </div>
 

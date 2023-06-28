@@ -1,9 +1,9 @@
 <?php
 if($_SERVER['REQUEST_METHOD'] == 'POST')
 {  
-    if($_POST['thang_search'] != 0|| $_POST['nam_search'] != 0)
+    if($_POST['thang'] != 0|| $_POST['nam'] != 0)
     {
-        $link ='/luongnhansu/export/?thang='.$_POST['thang_search'].'&nam='.$_POST['nam_search'];
+        $link ='/luongnhansu/export/?thang='.$_POST['thang'].'&nam='.$_POST['nam'];
           
     die(json_encode(
         array(
@@ -19,7 +19,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
             array(
                 
                 'status'=> '0',
-              
+                
             )
            ));
     }

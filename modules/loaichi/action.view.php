@@ -53,7 +53,14 @@ while($rs = $loai_chi->fetch()){
 	else if($rs['baocao'] == 1){
 		$rs['baocao'] = ' class="active-account"';
 	}
-	$rs['hanmucchi'] = number_format($rs['hanmucchi'], 0, ',', '.') . "VND";
+	if($rs['phi_van_tai'] == 0){
+		$rs['phi_van_tai'] = ' class="active-account-die"';
+	}
+	else if($rs['phi_van_tai'] == 1){
+		$rs['phi_van_tai'] = ' class="active-account"';
+	}
+	
+	$rs['hanmucchi'] = number_format($rs['hanmucchi'], 0, ',', '.') ;
 	if($rs['hanmucchi'] == 0){
 		$rs['hanmucchi'] = ' không giới hạn';
 	}

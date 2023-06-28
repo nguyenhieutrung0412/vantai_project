@@ -2,6 +2,9 @@
 
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    //Đổi tiền tệ
+    $tien_luong = $oClass->DoiSoTien(htmlspecialchars(trim($_REQUEST['luong'])));
+    $phu_cap = $oClass->DoiSoTien(htmlspecialchars(trim($_REQUEST['phu_cap'])));
     //lay id chuc vu
     $chucvu_id = $oContent->view_table("php_phongban", "`chuc_vu`= '".trim($_REQUEST['list_chucvu'])."' LIMIT 1");
     $chucvu_id =$chucvu_id->fetch();
@@ -14,9 +17,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     'position'=>htmlspecialchars(trim($_REQUEST['list_chucvu'])),
     'position_id'=>$chucvu_id['id'],
     'dateofcompany'=>htmlspecialchars(trim($_REQUEST['dateofcompany'])),
-    'luong_nhansu'=>htmlspecialchars(trim($_REQUEST['luong'])),
-    'phu_cap'=>htmlspecialchars(trim($_REQUEST['phu_cap'])),
-    'tien_baohiem'=>(htmlspecialchars(trim($_REQUEST['luong'])) + htmlspecialchars($_REQUEST['phu_cap']))  * 0.015,
+    'luong_nhansu'=>$tien_luong,
+    'phu_cap'=>$phu_cap,
+    
+    'tien_baohiem'=>$oClass->DoiSoTien(htmlspecialchars(trim($_REQUEST['tien_baohiem']))) ,
     'stk'=>htmlspecialchars(trim($_REQUEST['stk'])),
     'ngan_hang'=>htmlspecialchars(trim($_REQUEST['ngan_hang'])),
     'pwd'=>htmlspecialchars(md5(trim($_REQUEST['password']))),

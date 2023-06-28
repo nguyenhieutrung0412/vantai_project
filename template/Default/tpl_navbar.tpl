@@ -1,13 +1,20 @@
 <div class="nav-bar">
             <div class="nav-bar-left">
+              
                 <ul>
-                    <li class="nav-item-left nav-in">
+                <li class="nav-item-left">
+                    <div id="toggle">
+                                    
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </li>
+                    <li class="nav-item-left nav-in sm">
                         <a class="nav-link " id="sm-nav" style=" cursor: pointer;">
                             <span class="fa-solid"></span>
                         </a>
                     </li>
                   
-                    <li class="nav-item-left">
+                    <li class="nav-item-left ">
                         <a class="nav-link btn-notification" style=" cursor: pointer;" >
                             <i class="fa-solid fa-bell"></i>
                               
@@ -26,7 +33,7 @@
                             </ul>
                             <a class="btn all-notification" href="{root_dir}notification">Xem tất cả các thông báo </a>
                             <!--BOX boxadmin-->
-                                <a class="btn send-notification">Gửi thông báo <i class="fa-solid fa-paper-plane"></i></a>
+                                <a class="btn send-notification">Tạo thông báo <i class="fa-solid fa-paper-plane"></i></a>
                             <!--BOX boxadmin-->
                         </div>
                     </li>
@@ -70,6 +77,12 @@
 
             </div>
             <div class="nav-bar-right">
-               <h4>{master.company}</h4>
+               <!--<h4 text="{master.company}"></h4> -->
+               <ul>
+               
+              
+             
+                <li><a class="btn-create" onclick="return add_view('donhangle','add-view',0)">Nhận hàng rời</a></li><li><a href="/lichxe">Lịch xe</a></li><li><a href="/luongnhansu">Sổ lương</a></li>   <li><a href="/notification">Forum</a></li>   <li><a href="/hotro">Hỗ trợ</a></li>
+               </ul>
             </div>
         </div>

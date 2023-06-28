@@ -23,44 +23,99 @@ $arr = array(0,1);
 if(in_array($_SESSION['chucvu_id'],$arr)){
 	$tpl->box('boxadmin');
 }
-//Phân trang
-$tai_xe = $oContent->view_table('php_taixe');
-//lấy tổng số phần tử tin 
-$total = $tai_xe->num_rows();
-
-$limit = 20;
-$start = $limit*intval($_GET['page']);
-$url = $system->root_dir.'tai-xe';
-$dp = new paging($url,$total,$limit);
-$dp->current = '<a class="active_page">%d</a>';
-$tpl->assign(array('divpage'=>$dp->simple(10)));
 
 
-$tai_xe = $oContent->view_pagination('php_taixe',1,$start,$limit);
+if($_GET['name'] =='' && !isset($_GET['phone']) )
+{
+		//Phân trang
+	$tai_xe = $oContent->view_table('php_taixe');
+	//lấy tổng số phần tử tin 
+	$total = $tai_xe->num_rows();
+
+	$limit = 20;
+	$start = $limit*intval($_GET['page']);
+	$url = $system->root_dir.'tai-xe';
+	$dp = new paging($url,$total,$limit);
+	$dp->current = '<a class="active_page">%d</a>';
+	$tpl->assign(array('divpage'=>$dp->simple(10)));
 
 
-while($rs = $tai_xe->fetch()){
+	$tai_xe = $oContent->view_pagination('php_taixe',1,$start,$limit);
+	while($rs = $tai_xe->fetch()){
 	
-	$rs['id_security'] = $oClass->id_encode($rs['id']);
-	//xu lý active
+		$rs['id_security'] = $oClass->id_encode($rs['id']);
+		//xu lý active
+	
+		if($rs['active'] == 0){
+			$rs['active'] = ' class="active-account-die"';
+		}
+		else if($rs['active'] == 1){
+			$rs['active'] = ' class="active-account"';
+		}
+		if($rs['luong_chuyen'] == 0){
+			$rs['luong_chuyen_text'] = 'Không';
+		}
+		else if($rs['luong_chuyen'] == 1){
+			$rs['luong_chuyen_text'] = 'Có';
+		}
 
-	if($rs['active'] == 0){
-		$rs['active'] = ' class="active-account-die"';
+	
+		// format tien te
+		$rs['format_luong'] = number_format($rs['luong_taixe'], 0, ',', '.') . "";
+		$rs['phu_cap'] = number_format($rs['phu_cap'], 0, ',', '.') . "";
+		$rs['tien_baohiem'] = number_format($rs['tien_baohiem'], 0, ',', '.') . "";
+	
+	
+		$tpl->assign($rs,'detail');
+		
+		
 	}
-	else if($rs['active'] == 1){
-		$rs['active'] = ' class="active-account"';
+}else{
+	if($_GET['name'] !='')
+	{
+		
+		 $where .= " AND name_taixe LIKE '%".$_GET['name']."%'";
 	}
+	if($_GET['phone'] !='')
+	{
+		$where .= " AND phone_taixe LIKE '%".$_GET['phone']."%'";
+	}
+	//Phân trang
+	$tai_xe = $oContent->view_table('php_taixe');
+	//lấy tổng số phần tử tin 
+	$total = $tai_xe->num_rows();
 
-	// format tien te
-	$rs['format_luong'] = number_format($rs['luong_taixe'], 0, ',', '.') . "VND";
-	$rs['phu_cap'] = number_format($rs['phu_cap'], 0, ',', '.') . "VND";
-	$rs['tien_baohiem'] = number_format($rs['tien_baohiem'], 0, ',', '.') . "VND";
+	$limit = 20;
+	$start = $limit*intval($_GET['page']);
+	$url = $system->root_dir.'tai-xe';
+	$dp = new paging($url,$total,$limit);
+	$dp->current = '<a class="active_page">%d</a>';
+	$tpl->assign(array('divpage'=>$dp->simple(10)));
 
 
-	$tpl->assign($rs,'detail');
+	$tai_xe = $oContent->view_pagination('php_taixe','active < 5'.$where,$start,$limit);
+	while($rs = $tai_xe->fetch()){
+	
+		$rs['id_security'] = $oClass->id_encode($rs['id']);
+		//xu lý active
+	
+		if($rs['active'] == 0){
+			$rs['active'] = ' class="active-account-die"';
+		}
+		else if($rs['active'] == 1){
+			$rs['active'] = ' class="active-account"';
+		}
+	
+		// format tien te
+		$rs['format_luong'] = number_format($rs['luong_taixe'], 0, ',', '.') . "";
+		$rs['phu_cap'] = number_format($rs['phu_cap'], 0, ',', '.') . "";
+		$rs['tien_baohiem'] = number_format($rs['tien_baohiem'], 0, ',', '.') . "";
 	
 	
+		$tpl->assign($rs,'detail');
+	}
 }
+
 $meta = array();
 $meta['title'] = 'Tài xế';
 

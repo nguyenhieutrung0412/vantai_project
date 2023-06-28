@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])) {
 
 
     //lấy danh sách hình ảnh nếu có
-    $kt_img = $oContent->view_table("php_images", "type = 'php_donhangroi_s' AND type_id = '" . $rs['id'] . "'");
+    $kt_img = $oContent->view_table("php_images", "type = 'php_donhangroi' AND type_id = '" . $rs['id'] . "'");
     $total_img = $kt_img->num_rows();
     $p = 1;
 
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])) {
                         <img class="img-responsive" src="data/upload/images/' . $ds['file_name'] . '">
                     </a>
                
-                <span class="color-0" onclick="return deleteImage(' . $module . ',' . $action_delete . ',' . $code_act . ')"><i class="fa fa-trash "></i> Xóa</span>
+                
         </li>
     ';
 
@@ -157,7 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])) {
 
                     <tr>
                     
-                        <td class="td-first"><label for="">Loại hàng: </label></td>
+                        <td class="td-first"><label for="">Mô tả hàng: </label></td>
                         <td><input type="text" value="' . $rs['loaihang'] . '"  readonly></td>
                    
                     </tr>
@@ -193,24 +193,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])) {
                         <td><input type="text" value="' . $rs['thoigian_nhanhang'] . '"  readonly></td>
                
                     </tr>
-                    <tr>
-                    
-                        <td class="td-first"><label for="">Tên người nhận hàng: </label></td>
-                        <td><input type="text" value="' . $rs['ten_nguoinhan'] . '"  readonly></td>
-                    
-                    </tr>
-                    <tr>
-                    
-                        <td class="td-first"><label for="">CMND người nhận: </label></td>
-                        <td><input type="text" value="' . $rs['cmnd_nguoinhan'] . '"  readonly></td>
-                    
-                    </tr>
-                    <tr>
-                    
-                        <td class="td-first"><label for="">Số điện thoại người nhận: </label></td>
-                        <td><input type="text" value="' . $rs['phone_nguoinhan'] . '"  readonly></td>
-                    
-                    </tr>
+                
+                   
+                
                     <tr>
                     
                         <td class="td-first"><label for="">Địa chỉ giao hàng: </label></td>
@@ -270,19 +255,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])) {
                     <tr>
                     
                         <td class="td-first"><label for="">Tên người nhận: </label></td>
-                        <td><input type="text" value="' . $rs['ten_nguoinhan_thuc'] . '"  readonly></td>
+                        <td><input type="text" value="' . $rs['ten_nguoinhan'] . '"  readonly></td>
                     
                     </tr>
                     <tr>
                     
                         <td class="td-first"><label for="">Số điện thoại: </label></td>
-                        <td><input type="text" value="' . $rs['phone_nguoinhan_thuc'] . '"  readonly></td>
+                        <td><input type="text" value="' . $rs['phone_nguoinhan'] . '"  readonly></td>
                     
                     </tr>
                     <tr>
                     
                         <td class="td-first"><label for="">CMND: </label></td>
-                        <td><input type="text" value="' . $rs['cmnd_nguoinhan_thuc'] . '"  readonly></td>
+                        <td><input type="text" value="' . $rs['cmnd_nguoinhan'] . '"  readonly></td>
                     
                     </tr>
                     ' . $hinhanh . '

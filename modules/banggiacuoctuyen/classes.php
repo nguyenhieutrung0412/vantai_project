@@ -36,4 +36,10 @@ class ClassModel extends MasterModel{
 		 $id = substr($id_security,7,-7);
 		 return $id;
 	}
+	function DoiSoTien($str)
+	{
+		$str = str_replace(",", "", $str);
+		$str = str_replace(".", "", $str);
+		return $str;
+	}
 }

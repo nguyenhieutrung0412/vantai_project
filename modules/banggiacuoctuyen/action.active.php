@@ -4,13 +4,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
 
     
     $id = $oClass->id_decode($_POST['id']);
-    $result = $oContent->view_table("php_loaichi", "`id`= ".$id." LIMIT 1");
+    $result = $oContent->view_table("php_banggiacuoc_tuyen", "`id`= ".$id." LIMIT 1");
      $rs = $result->fetch();
     if($rs['active'] == 0){
-        $oClass->updateActive("php_loaichi",1,"`php_loaichi`.`id` = ".$id  );
+        $oClass->updateActive("php_banggiacuoc_tuyen",1,"`php_banggiacuoc_tuyen`.`id` = ".$id  );
     }
     else if($rs['active'] == 1){
-        $update = $oClass->updateActive("php_loaichi",0,"`id` = ".$id  );
+        $update = $oClass->updateActive("php_banggiacuoc_tuyen",0,"`id` = ".$id  );
     }
 
     die(json_encode(

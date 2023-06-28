@@ -14,7 +14,7 @@
                     </a>
                 </div>
             </div>
-            <div class="table">
+            <div class="table table_scroll">
                 <div class="first-table">
                     <div class="btn-new">
                         <a class="btn-create {xuly.them}"><i class="fa-solid fa-plus"></i> Tạo mới</a>
@@ -51,9 +51,12 @@
                             <th>Mã ứng lương</th>
                             <th>Tên nhân sự</th>
                             <th>Số tiền ứng</th>
-                            <th>Ngày giờ yêu cầu ứng</th>     
+                            <th>Ngày yêu cầu ứng</th>     
+                            <th>Ngày giờ tạo phiếu</th>     
                             <th>Tên kế toán</th>
+                            <!--BOX boxadmin-gd-ktt-->
                             <th>Xét duyệt</th>
+                            <!--BOX boxadmin-gd-ktt-->
                             <th>Lựa chọn</th>
                         </tr>
                     </thead>
@@ -63,9 +66,12 @@
                             <td>{detail.id}</td>
                             <td>{detail.name}</td>
                             <td>{detail.so_tien_ung}</td>
+                            <td>{detail.ngay}/{detail.thang}/{detail.nam}</td>
                             <td>{detail.thoi_gian_ung}</td>
                             <td>{detail.nguoi_tao_don}</td>
+                            <!--BOX boxadmin-gd-ktt-->
                             <td class="active" ><a {detail.active}  onclick="return active_user('ungluong','active','{detail.id_security}')"> <i class="fa-solid fa-circle "></i> </a></td>
+                            <!--BOX boxadmin-gd-ktt-->
                             <td class="select"> 
                                 <a class="btn-update {xuly.sua} {detail.edit_delete}" onclick="return update_view('ungluong','update-view',{detail.id_security})" > <i class="fa-solid fa-pen icon-edit"></i></a>
                                 <a class=" {xuly.xoa} {detail.edit_delete}" onclick= "return _delete('ungluong','delete','{detail.id_security}')"> <i class="fa-solid fa-trash icon-delete"></i></a>
@@ -104,7 +110,9 @@
 </div>
 
 <div class="popup-create" >
+
         <div class="pop-up">
+        <span class="close_pop">×</span>
             <h3>Thêm mới</h3>
             <form autocomplete="off" name="frmAddungluong" id="frmAddungluong" method="post" onsubmit = "return add('ungluong','add','frmAddungluong',1)"  enctype="multipart/form-data">
                 

@@ -14,7 +14,7 @@
                     </a>
                 </div>
             </div>
-            <div class="table">
+            <div class="table table_scroll">
                 <div class="first-table">
                     <div class="btn-new">
                         <a class="btn-create {xuly.them}" onclick="return add_view('luongnhansu','add-view')"><i class="fa-solid fa-plus"></i> Tạo mới</a>
@@ -41,6 +41,8 @@
                                 {list_select.list_select}
                         
                             </select>
+                            <input class="hidden" type="hidden" name="thang" value="{thang_nam.thang}">
+                            <input class="input" type="hidden" name="nam" value="{thang_nam.nam}">
                             <button >Refresh</button>
                             <button class="info"  type="submit">Search</button>
                             <div class="btn-active-all">
@@ -65,8 +67,10 @@
                             <th>Nghỉ không phép</th>
                             <th>Tổng lương đã ứng</th>
                             <th>Tổng lương</th>
-                            <th>Tên kế toán</th>       
+                            <th>Tên kế toán</th> 
+                            <!--BOX boxadmin-gd-ktt-->      
                             <th>Xét duyệt</th>
+                            <!--BOX boxadmin-gd-ktt-->
                             <th>Lựa chọn</th>
                         </tr>
                     </thead>
@@ -85,7 +89,9 @@
                             <td>{detail.tong_ungluong} <i class="fa-solid fa-plus add btn-thuongnong {detail.edit_delete}" onclick="return update_view('luongnhansu','ungluong-add-view',{detail.id_security})"></i></td>
                             <td>{detail.tong_luong}</td>
                             <td>{detail.nguoi_tao}</td>
+                            <!--BOX boxadmin-gd-ktt-->
                             <td class="active" ><a {detail.active}  onclick="return active_user('luongnhansu','active','{detail.id_security}')"> <i class="fa-solid fa-circle "></i> </a></td>
+                            <!--BOX boxadmin-gd-ktt-->
                             <td class="select"> 
                                 <a class="btn-update {xuly.sua} {detail.edit_delete}" onclick="return update_view('luongnhansu','update-view',{detail.id_security})" data-id ="{detail.id_security}"> <i class="fa-solid fa-pen icon-edit"></i></a>
                                 <a class=" {xuly.xoa} {detail.edit_delete}" onclick= "return _delete('luongnhansu','delete','{detail.id_security}')"> <i class="fa-solid fa-trash icon-delete"></i></a>

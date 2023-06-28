@@ -16,6 +16,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
     if($total==1){
         $str = '
         <div class="pop-up">
+        <span class="close_pop">×</span>
         <h3>Update</h3>
          <form name="frmUpdatemenu" id="frmUpdatemenu" method="post" onsubmit = "return _edit('.$module.','.$update.','.$frm.',1)"  enctype="multipart/form-data">
             

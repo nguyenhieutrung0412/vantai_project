@@ -1,10 +1,17 @@
 <?php
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    if(htmlspecialchars(trim($_REQUEST['hanmucchi'])) == '')
+    {
+        $num = 0;
+    }
+    else{
+        $num = htmlspecialchars(trim($_REQUEST['hanmucchi']));
+    }
    $data = array(
     'id' => $oClass->id_decode($_REQUEST['id']),
     'loai_chi'=>htmlspecialchars(trim($_REQUEST['name_loaichi'])),
-    'hanmucchi'=>htmlspecialchars(trim($_REQUEST['hanmucchi'])),
+    'hanmucchi'=>$num,
    );
     $oClass->update("php_loaichi",$data,"id=".$data['id']);
     

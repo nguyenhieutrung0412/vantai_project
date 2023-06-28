@@ -64,21 +64,21 @@ if($_SESSION['chucvu_id'] == 0 ||$_SESSION['chucvu_id'] == 1 || $_SESSION['chucv
 			}
 
 			// format tien te
-			$rs['tong_luong'] = number_format($rs['tong_luong'], 0, ',', '.') . "VND";
-			$rs['thuong_nong'] = number_format($rs['thuong_nong'], 0, ',', '.') . "VND";
-			$rs['luong_thoa_thuan'] = number_format($rs['luong_thoa_thuan'], 0, ',', '.') . "VND";
-			$rs['tong_ungluong'] = number_format($rs['tong_ungluong'], 0, ',', '.') . "VND";
-			$rs['tong_so_ngay_nghi_khong_phep'] = number_format($rs['tong_so_ngay_nghi_khong_phep'], 0, ',', '.') . "VND";
-			$rs['tien_bao_hiem'] = number_format($rs['tien_bao_hiem'], 0, ',', '.') . "VND";
-			$rs['tang_ca'] = number_format($rs['tang_ca'], 0, ',', '.') . "VND";
-			$rs['phu_cap'] = number_format($rs['phu_cap'], 0, ',', '.') . "VND";
+			$rs['tong_luong'] = number_format($rs['tong_luong'], 0, ',', '.') . "";
+			$rs['thuong_nong'] = number_format($rs['thuong_nong'], 0, ',', '.') . "";
+			$rs['luong_thoa_thuan'] = number_format($rs['luong_thoa_thuan'], 0, ',', '.') . "";
+			$rs['tong_ungluong'] = number_format($rs['tong_ungluong'], 0, ',', '.') . "";
+			$rs['tong_so_ngay_nghi_khong_phep'] = number_format($rs['tong_so_ngay_nghi_khong_phep'], 0, ',', '.') . "";
+			$rs['tien_bao_hiem'] = number_format($rs['tien_bao_hiem'], 0, ',', '.') . "";
+			$rs['tang_ca'] = number_format($rs['tang_ca'], 0, ',', '.') . "";
+			$rs['phu_cap'] = number_format($rs['phu_cap'], 0, ',', '.') . "";
 				
 			$tpl->assign($rs,'detail');
 
 			
 		}
 		$tpl->merge($thang_and_nam,'thang_nam');
-		$rs2['tongluong_thang'] = number_format($rs2['tongluong_thang'], 0, ',', '.') . "VND";
+		$rs2['tongluong_thang'] = number_format($rs2['tongluong_thang'], 0, ',', '.') . "";
 			$tpl->merge($rs2,'tong');
 		}
 	}
@@ -145,15 +145,15 @@ if($_SESSION['chucvu_id'] == 0 ||$_SESSION['chucvu_id'] == 1 || $_SESSION['chucv
 					}
 					$rs2['tongluong_thang'] += $rs['tong_luong'];
 					// format tien te
-					$rs['tong_luong'] = number_format($rs['tong_luong'], 0, ',', '.') . "VND";
-					$rs['thuong_nong'] = number_format($rs['thuong_nong'], 0, ',', '.') . "VND";
-					$rs['luong_thoa_thuan'] = number_format($rs['luong_thoa_thuan'], 0, ',', '.') . "VND";
-					$rs['tong_ungluong'] = number_format($rs['tong_ungluong'], 0, ',', '.') . "VND";
-					$rs['tien_bao_hiem'] = number_format($rs['tien_bao_hiem'], 0, ',', '.') . "VND";
-					$rs['tang_ca'] = number_format($rs['tang_ca'], 0, ',', '.') . "VND";
+					$rs['tong_luong'] = number_format($rs['tong_luong'], 0, ',', '.') . "";
+					$rs['thuong_nong'] = number_format($rs['thuong_nong'], 0, ',', '.') . "";
+					$rs['luong_thoa_thuan'] = number_format($rs['luong_thoa_thuan'], 0, ',', '.') . "";
+					$rs['tong_ungluong'] = number_format($rs['tong_ungluong'], 0, ',', '.') . "";
+					$rs['tien_bao_hiem'] = number_format($rs['tien_bao_hiem'], 0, ',', '.') . "";
+					$rs['tang_ca'] = number_format($rs['tang_ca'], 0, ',', '.') . "";
 				
-					$rs['tong_so_ngay_nghi_khong_phep'] = number_format($rs['tong_so_ngay_nghi_khong_phep'], 0, ',', '.') . "VND";
-					$rs['phu_cap'] = number_format($rs['phu_cap'], 0, ',', '.') . "VND";
+					$rs['tong_so_ngay_nghi_khong_phep'] = number_format($rs['tong_so_ngay_nghi_khong_phep'], 0, ',', '.') . "";
+					$rs['phu_cap'] = number_format($rs['phu_cap'], 0, ',', '.') . "";
 					
 					$tpl->assign($rs,'detail');
 
@@ -161,7 +161,7 @@ if($_SESSION['chucvu_id'] == 0 ||$_SESSION['chucvu_id'] == 1 || $_SESSION['chucv
 					
 				}
 
-				$rs2['tongluong_thang'] = number_format($rs2['tongluong_thang'], 0, ',', '.') . "VND";
+				$rs2['tongluong_thang'] = number_format($rs2['tongluong_thang'], 0, ',', '.') . "";
 				$tpl->merge($rs2,'tong');
 			}
 			else{

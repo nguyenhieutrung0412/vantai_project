@@ -1,33 +1,29 @@
 <?php
-/**
- * @Name: Shopnhac.com - Version 1.0
- * @Author: Mr.Phin <mh.phin@gmail.com>
- * @Link: https://www.facebook.com/hoaphin
- * @Copyright: &copy; 2021 Shopnhac.com
- */
+
 defined('_ROOT') or die(__FILE__);
-if(!isset($_SESSION['user_id']) && !isset($_SESSION['name_taixe']) && $_SESSION['active'] == 0){
+if(!isset($_SESSION['admin_login']['id']) && !isset($_SESSION['admin_login']['name_taixe']) && $_SESSION['admin_login']['active'] == 0){
 	header("Location: ".$domain);
 	exit;
 }
 $tpl->setfile(array(
-	'tpl_meta'=>'tpl_meta.tpl',
-	'tpl_header'=>'tpl_header.tpl',
-	'tpl_body'=>'detail_donhang.tpl',
-	'tpl_footer'=>'tpl_footer.tpl',
+	//'tpl_meta'=>'tpl_meta.tpl',
+	//'tpl_header'=>'tpl_header.tpl',
+	'body'=>'detail_donhang.tpl',
+	//'tpl_footer'=>'tpl_footer.tpl',
 ));
+
 if(isset($_GET['code']) && isset($_GET['type']))
 {
     if($_GET['type'] == 'donhangtrongoi')
     {
         $id_donhang = $_GET['code'];
-        $donhangtrongoi = $oContent->view_table('php_donhangtrongoi','id_taixe = '.$_SESSION['id_taixe'] .' AND id ='.$id_donhang);
+        $donhangtrongoi = $oContent->view_table('php_donhangtrongoi','id_taixe = '.$_SESSION['admin_login']['id'] .' AND id ='.$id_donhang);
         $count =$donhangtrongoi->num_rows();
         
         if($count > 0)
         {
             $rs = $donhangtrongoi->fetch();
-         
+            $rs['id_security'] = $oClass->id_encode($rs['id']);
             if($rs['hinhthucthanhtoan'] == 'thanhtoantienmat')
             {
                 $rs['hinhthucthanhtoan'] = 'Thanh toán bằng tiền mặt';
@@ -53,6 +49,25 @@ if(isset($_GET['code']) && isset($_GET['type']))
             $rs_nhansu = $nhansu->fetch();
             $tpl->merge($rs_nhansu,'nhansu');
             //end kh
+            // //xử lý tình trạng đơn 
+
+		if ($rs['tinhtrangdon'] == 1) {
+
+
+			$rs['check-1'] = ' line1-check';
+		} else if ($rs['tinhtrangdon'] == 2) {
+			$rs['check-1'] = ' line1-check';
+			$rs['check-2'] = ' line2-check';
+		} else if ($rs['tinhtrangdon'] == 3) {
+			$rs['check-1'] = ' line1-check';
+			$rs['check-2'] = ' line2-check';
+			$rs['check-3'] = ' line3-check';
+		} else if ($rs['tinhtrangdon'] == 4) {
+			$rs['check-1'] = ' line1-check';
+			$rs['check-2'] = ' line2-check';
+			$rs['check-3'] = ' line3-check';
+			$rs['check-4'] = ' line4-check';
+		}
              //mat hang
              $mathang = $oContent->view_table('php_mathang_donhang','id_donhang = '.$rs['id']);
              while($rs_mathang = $mathang->fetch()){

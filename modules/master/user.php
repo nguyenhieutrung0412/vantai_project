@@ -8,6 +8,9 @@ $master = $ktmaster->fetch();
 
 $domain = $master['domain'];
 
+$chatluonganh = $master['chatluong_hinhupload'];
+
+
 
 if(!isset($_SESSION['user_id']) && !isset($_SESSION['position'])){
 	//  header("Location: ".$domain."login");
@@ -17,7 +20,8 @@ if(!isset($_SESSION['user_id']) && !isset($_SESSION['position'])){
 	$master['user_name'] = $_SESSION['name'];
 
 }
-if($system->params[0] == 'login')
+
+if($system->params[0] == '')
 {
 	$master['login'] = 'style="width:100%;"';
 }
@@ -30,6 +34,10 @@ if(in_array($_SESSION['chucvu_id'],$arr)){
 $arr2 = array(0);
 if(in_array($_SESSION['chucvu_id'],$arr2)){
 	$tpl->box('boxadmin-phanquyen');
+}
+$arr3 = array(0,1,2);
+if(in_array($_SESSION['chucvu_id'],$arr)){
+	$tpl->box('boxadmin-gd-ktt');
 }
 //Đẩy thông báo cho người dùng chưa xem
 if(isset($_SESSION['user_id'])){
@@ -70,10 +78,14 @@ if(in_array($_SESSION['chucvu_id'],$arr)){
 
 
 //xử lý menu động cho trang web
- $count  = count($MenuName);
+  $count  = count($MenuName);
+ 
+ 
 for($i = 0; $i < $count; $i++ ){
+	//echo $i;
 	if($_SESSION['chucvu_id'] == 0){
-		$k = count($MenuName[$i]);
+		 $k = count($MenuName[$i]);
+		
 	$str_menu1 .= '
 	<li class="nav-item ">
 	<a class=" drop-after">
@@ -116,14 +128,21 @@ for($i = 0; $i < $count; $i++ ){
 		$str_menu1 .= '</ul></li>';
 	}
 	else{
-		$menu = $model->db->query("SELECT php_menu.* FROM php_quyen 
-		LEFT JOIN php_menu_phanquyen ON php_quyen.id_menu_quyen = php_menu_phanquyen.id 
-		LEFT JOIN php_menu ON php_menu_phanquyen.id_menu_cha = php_menu.id 
-		WHERE php_quyen.id_phongban = ".$_SESSION['chucvu_id']);
-		while( $menu2 = $menu->fetch()){
+		// $menu = $model->db->query("SELECT php_quyen_menucha.* FROM php_quyen 
+		// LEFT JOIN php_menu_phanquyen ON php_quyen.id_menu_quyen = php_menu_phanquyen.id 
+		// LEFT JOIN php_menu ON php_menu_phanquyen.id_menu_cha = php_menu.id 
+		// LEFT JOIN php_quyen_menucha ON php_quyen_menucha.id_menu_cha = php_menu.id 
+		// WHERE php_quyen.id_phongban = ".$_SESSION['chucvu_id']);
+		$menu = $model->db->query("SELECT * FROM php_quyen_menucha 
 		
-			if($menu2['name_menu'] == $MenuName[$i]['name'] && $menu2['active'] == 1){
+		WHERE id_phongban = ".$_SESSION['chucvu_id']);
+		//echo $count =$menu->num_rows();
+		while($menu2 = $menu->fetch()){
+			//echo $menu2['ten'];
+			
+			if($menu2['ten'] == $MenuName[$i]['name'] && $menu2['active'] == 1){
 				
+				//echo $MenuName[5]['name'];
 				$k = count($MenuName[$i]);
 				$str_menu1 .= '
 				<li class="nav-item ">
@@ -136,6 +155,7 @@ for($i = 0; $i < $count; $i++ ){
 					</span>
 					<ul class="drop-down-item">';
 					for($j=0; $j < $k ;$j++){
+
 						if(is_array($MenuName[$i][$j])){
 							if($_SESSION['chucvu_id'] == 0){
 								$link[] = $MenuName[$i][$j]['link'];
@@ -165,14 +185,19 @@ for($i = 0; $i < $count; $i++ ){
 					$str_menu1 .= '</ul></li>';
 			}
 		}
+	
 	}
  };
 $link[] = ''; 
-$link[] = 'login'; 
+$link[] = 'trangchu'; 
 $link[] = 'menuadmin'; 
 
 $link[] = 'notification'; 
+$link[] = 'ajax'; 
+$link[] = 'donhangle'; 
 $link[] = 'profile';
+$link[] = 'lichxe';
+$link[] = 'hotro';
 $link[] = 'cauhinh';   
 $tpl->assign($str_menu1,'menu');
 
@@ -211,6 +236,7 @@ for($i = 0; $i < count($link2);$i++){
  if(!in_array($system->params[0],$link)){
 	die(header("Location: ".$domain));
 }
+
  
 
  

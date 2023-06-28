@@ -13,7 +13,7 @@
                     </a>
                 </div>
             </div>
-            <div class="table">
+            <div class="table table_scroll">
                 <div class="first-table">
                     <div class="btn-new">
                         <a class="btn-create {xuly.them}"><i class="fa-solid fa-plus"></i> Tạo mới</a>
@@ -26,6 +26,7 @@
                             <th>Tên loại chi</th>
                             <th>Hạn mức chi</th>
                             <th>Báo cáo</th>
+                            <th>Phí vận tải</th>
                             <th>Active</th>
                             <th>Lựa chọn</th>
                         </tr>
@@ -37,7 +38,9 @@
                             <td>{detail.loai_chi}</td>
                             <td>{detail.hanmucchi}</td>
                             <td class="active" ><a {detail.baocao}  onclick="return active_user('loaichi','baocao','{detail.id_security}')"> <i class="fa-solid fa-square-check"></i> </a></td>
-                            <td class="active" ><a {detail.active}  onclick="return active_user('loaichi','baocao','{detail.id_security}')"> <i class="fa-solid fa-circle "></i> </a></td>
+                             <td class="active" ><a {detail.phi_van_tai}  onclick="return active_user('loaichi','phi_van_tai','{detail.id_security}')"> <i class="fa-solid fa-circle "></i> </a></td>
+                            <td class="active" ><a {detail.active}  onclick="return active_user('loaichi','active','{detail.id_security}')"> <i class="fa-solid fa-circle "></i> </a></td>
+                           
                             <td class="select">
                                 <a class="btn-update {xuly.sua}" onclick="return update_view('loaichi','update-view',{detail.id_security})" data-id ="{detail.id_security}"> <i class="fa-solid fa-pen icon-edit"></i></a>
                                 <a class=" {xuly.xoa} " onclick= "return _delete('loaichi','delete','{detail.id_security}')"> <i class="fa-solid fa-trash icon-delete"></i></a>
@@ -73,18 +76,19 @@
 
 <div class="popup-create">
         <div class="pop-up">
+        <span class="close_pop">×</span>
             <h3>Thêm mới</h3>
             <form autocomplete="off" name="frmAddloaichi" id="frmAddloaichi" method="post" onsubmit = "return add('loaichi','add','frmAddloaichi',1)"  enctype="multipart/form-data">
                 
         <table class="table-input">
          <tbody>
             <tr>
-                <td class="td-first">Tên loại chi</td>
+                <td class="td-first">Tên loại chi *</td>
                  <td><input type="text" name="name_loaichi"  placeholder="Tên loại chi" required></td>
             </tr>
              <tr>
-                 <td class="td-first">Hạn mức chi</td>
-                <td><input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  name="hanmucchi"  placeholder="Hạn mức chi"></td>
+                 <td class="td-first">Hạn mức chi *</td>
+                <td><input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  name="hanmucchi"  placeholder="Nhập 0 nếu là không giới hạn hạn mức"></td>
              </tr>
             
          </tbody>
@@ -94,7 +98,7 @@
                 <div class="btn-submit">
                    
                     <button type="submit" class="submit">Thêm</button>
-                     <button type="reset" class="cancel">Đong</button>
+                     <button type="reset" class="cancel">Đóng</button>
                 </div>
             </form>
         </div>

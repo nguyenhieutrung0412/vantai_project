@@ -15,35 +15,32 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
     if(isset($rs['id'])){
         $str = '
         <div class="pop-up">
-        <h3>Update</h3>
+        <span class="close_pop">×</span>
+        <h3>Cập nhật khách hàng</h3>
         <form name="frmUpdateKhachHang" id="frmUpdateKhachHang" method="post" onsubmit = "return _edit('.$module.','.$update.','.$frm.',1)"  enctype="multipart/form-data">
             
         <table class="table-input">
                         <tbody>
                             <tr>
-                                <td class="td-first">Họ và tên</td>
+                                <td class="td-first">Họ và tên *</td>
                                 <td>
                                     <input type="text" name="name"  placeholder="Name" value = "'.$rs['name_kh'].'" required>
                                 </td>
                             </tr>
                              <tr>
-                                <td class="td-first">Số điện thoại</td>
+                                <td class="td-first">Số điện thoại *</td>
                                 <td>
                                     <input type="tel" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="10" name="phone" value = "'.$rs['phone_kh'].'"  placeholder="Số điện thoại" required>
                                 </td>
                             </tr>
                              <tr>
-                                <td class="td-first">Địa chỉ</td>
+                                <td class="td-first">Địa chỉ *</td>
                                 <td>
                                     <input type="text" name="address"  placeholder="Địa chỉ" value = "'.$rs['address_kh'].'" required>
                                 </td>
                             </tr>
-                             <tr>
-                                <td class="td-first">Email</td>
-                                <td>
-                                    <input type="email" name="email"  placeholder="Email" value = "'.$rs['email_kh'].'" required>
-                                </td>
-                            </tr>
+                     
+                       
                             <tr>
                                 <td class="td-first">Tên công ty</td>
                                 <td>
@@ -56,12 +53,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
                                     <input type="text" name="masothue"  placeholder="Mã số thuế" value = "'.$rs['masothue'].'" >
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="td-first">CMND/CCCD</td>
-                                <td>
-                                    <input type="text" name="cmnd"  placeholder="CMND" value = "'.$rs['cmnd'].'" required>
-                                </td>
-                            </tr>
+                     
                             <tr>
                                 <td class="td-first">Mật khẩu</td>
                                 <td>  <input type="password" name="password"  placeholder="Mật khẩu" ></td>
@@ -71,10 +63,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
             <input type="hidden" name="id" value="'.$rs['id_security'].'">
             <div class="btn-submit">
              
-                <button type="submit" class="submit">Update</button>
+                <button type="submit" class="submit">Cập nhật</button>
                 <button type="reset" onclick="return cancel()" class="cancel">Đóng</button>
             </div>
         </form>
+        <script type="text/javascript" src="template/Default/js/main_load.js"></script>
     </div>
         ';
         die(json_encode(

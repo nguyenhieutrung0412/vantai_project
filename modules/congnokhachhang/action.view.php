@@ -19,7 +19,7 @@ if ($_SESSION['chucvu_id'] == 0 || $_SESSION['chucvu_id'] == 1 || $_SESSION['chu
 
 	));
 
-	if ($_GET['code'] == '' && $_GET['thang'] == 0 && $_GET['nam'] == 0) {
+	if ($_GET['thang'] == 0 && $_GET['nam'] == 0) {
 
 		//lấy tháng và năm mới nhất trong bảng lương
 		$thang_nam = $model->db->query("SELECT thang,nam FROM php_congnokhachhang GROUP BY id DESC LIMIT 1 ");
@@ -38,17 +38,18 @@ if ($_SESSION['chucvu_id'] == 0 || $_SESSION['chucvu_id'] == 1 || $_SESSION['chu
 			while ($rs = $congno->fetch()) {
 
 				$rs['id_security'] = $oClass->id_encode($rs['id']);
+				$rs['id_khachhang_security'] = $oClass->id_encode($rs['id_khachhang']);
 
 				//xu lý active
 
 				if ($rs['active'] == 0) {
-					$rs['active'] = ' class="active-account-die"';
+					$rs['active'] = ' active-account-die';
 					$rs['edit_delete'] = '';
 				} else if ($rs['active'] == 1) {
-					$rs['active'] = ' class="active-account"';
+					$rs['active'] = ' active-account';
 					$rs['edit_delete'] = ' remove';
 				}
-				$rs2['tongcongno_thang'] += $rs['so_tien'];
+				$rs2['tongcongno_thang'] += $rs['tong_thanhtoan'];
 				//Xu lý hiển thị tên kh
 				if ($rs['id_khachhang'] != 0) {
 					$id_loaichi = $model->db->query("SELECT * FROM php_khachhang WHERE id =" . $rs['id_khachhang']);
@@ -62,16 +63,33 @@ if ($_SESSION['chucvu_id'] == 0 || $_SESSION['chucvu_id'] == 1 || $_SESSION['chu
 						$rs['masothue'] = $rs_join['masothue'];
 					}
 				}
+				//xử lý số lần đã thanh toán công nợ trong một tháng
+				$phieuthu_congno = $model->db->query("SELECT * FROM php_phieuthu WHERE id_congnohangtrongoi =" . $rs['id']." AND active_congnotrongoi = 1");
+				$count_phieuthu = $phieuthu_congno->num_rows();
+				if($count_phieuthu > 0)
+				{
+					$rs['so_lan_thanh_toan'] = '<a href="/congnokhachhang/phieuthu/?code='.$rs['id_security'].'"><span style="color:#39c449;display:block;">(Lần '.$count_phieuthu.')</span></a>';
+				}
 
+				//xử lý phí vat
+				$rs['phivat'] = $rs['tong_tien'] * ($rs['vat'] / 100);
+				//xử lý nợ tôn
+				$rs['no_ton'] = $rs['tong_thanhtoan'] - $rs['sotien_thanhtoan']; 
 				// format tien te
-				$rs['so_tien'] = number_format($rs['so_tien'], 0, ',', '.') . "VND";
+				$rs['tong_thanhtoan'] = number_format($rs['tong_thanhtoan'], 0, ',', '.') . "";
+				$rs['phivat'] = number_format($rs['phivat'], 0, ',', '.') . "";
+				$rs['no_ton'] = number_format($rs['no_ton'], 0, ',', '.') . "";
+				$rs['sotien_thanhtoan'] = number_format($rs['sotien_thanhtoan'], 0, ',', '.') . "";
+				$rs['tong_tien'] = number_format($rs['tong_tien'], 0, ',', '.') . "";
+				$rs['so_tien'] = number_format($rs['so_tien'], 0, ',', '.') . "";
+				$rs['tien_phatsinh'] = number_format($rs['tien_phatsinh'], 0, ',', '.') . "";
 
 
 
 				$tpl->assign($rs, 'detail');
 			}
 			$tpl->merge($thang_and_nam, 'thang_nam');
-			$rs2['tongcongno_thang'] = number_format($rs2['tongcongno_thang'], 0, ',', '.') . "VND";
+			$rs2['tongcongno_thang'] = number_format($rs2['tongcongno_thang'], 0, ',', '.') . "";
 			$tpl->merge($rs2, 'tong');
 		}
 	} else {
@@ -82,10 +100,10 @@ if ($_SESSION['chucvu_id'] == 0 || $_SESSION['chucvu_id'] == 1 || $_SESSION['chu
 
 
 
-		if (isset($_GET['code'])) {
-			$id = $oClass->id_decode($_GET['code']);
-			$id_where = ' AND id =' . $id;
-		}
+		// if (isset($_GET['code'])) {
+		// 	$id = $oClass->id_decode($_GET['code']);
+		// 	$id_where = ' AND id =' . $id;
+		// }
 		if (isset($_GET['thang'])) {
 			$thang_where = ' AND thang =' . $_GET['thang'];
 		}
@@ -102,7 +120,7 @@ if ($_SESSION['chucvu_id'] == 0 || $_SESSION['chucvu_id'] == 1 || $_SESSION['chu
 		if ($total >= 1) {
 			$limit = 10;
 			$start = $limit * intval($_GET['page']);
-			$url = $system->root_dir . 'php_congnokhachhang';
+			$url = $system->root_dir . 'congnokhachhang';
 			$dp = new paging($url, $total, $limit);
 			$dp->current = '<a class="active_page">%d</a>';
 			$tpl->assign(array('divpage' => $dp->simple(10)));
@@ -114,18 +132,18 @@ if ($_SESSION['chucvu_id'] == 0 || $_SESSION['chucvu_id'] == 1 || $_SESSION['chu
 			while ($rs = $phieu_chi_search->fetch()) {
 
 				$rs['id_security'] = $oClass->id_encode($rs['id']);
-				$rs['user_id_security'] = $oClass->id_encode($rs['user_id']);
+				$rs['id_khachhang_security'] = $oClass->id_encode($rs['id_khachhang']);
 				//xu lý active
 
 				if ($rs['active'] == 0) {
-					$rs['active'] = ' class="active-account-die"';
+					$rs['active'] = ' active-account-die';
 					$rs['edit_delete'] = '';
 				} else if ($rs['active'] == 1) {
-					$rs['active'] = ' class="active-account"';
+					$rs['active'] = ' active-account';
 					$rs['edit_delete'] = ' remove';
 				}
 
-				$rs2['tongcongno_thang'] += $rs['so_tien'];
+				$rs2['tongcongno_thang'] += $rs['tong_thanhtoan'];
 				//Xu lý hiển thị tên kh
 				if ($rs['id_khachhang'] != 0) {
 					$id_loaichi = $model->db->query("SELECT * FROM php_khachhang WHERE id =" . $rs['id_khachhang']);
@@ -139,9 +157,27 @@ if ($_SESSION['chucvu_id'] == 0 || $_SESSION['chucvu_id'] == 1 || $_SESSION['chu
 						$rs['masothue'] = $rs_join['masothue'];
 					}
 				}
+				//xử lý số lần đã thanh toán công nợ trong một tháng
+				$phieuthu_congno = $model->db->query("SELECT * FROM php_phieuthu WHERE id_congnohangtrongoi =" . $rs['id'] ." AND active_congnotrongoi = 1");
+				$count_phieuthu = $phieuthu_congno->num_rows();
+				if($count_phieuthu > 0)
+				{
+					$rs['so_lan_thanh_toan'] = '<a href="/congnokhachhang/phieuthu/?code='.$rs['id_security'].'"><span style="color:#39c449;display:block;">(Lần '.$count_phieuthu.')</span></a>';
+				}
 
-				// format tien te
-				$rs['so_tien'] = number_format($rs['so_tien'], 0, ',', '.') . "VND";
+					//xử lý phí vat
+					$rs['phivat'] = $rs['tong_tien'] * ($rs['vat'] / 100);
+					//xử lý nợ tôn
+					$rs['no_ton'] = $rs['tong_thanhtoan'] - $rs['sotien_thanhtoan']; 
+					// format tien te
+					$rs['tong_thanhtoan'] = number_format($rs['tong_thanhtoan'], 0, ',', '.') . "";
+					$rs['phivat'] = number_format($rs['phivat'], 0, ',', '.') . "";
+					$rs['no_ton'] = number_format($rs['no_ton'], 0, ',', '.') . "";
+					$rs['sotien_thanhtoan'] = number_format($rs['sotien_thanhtoan'], 0, ',', '.') . "";
+					$rs['tong_tien'] = number_format($rs['tong_tien'], 0, ',', '.') . "";
+					$rs['so_tien'] = number_format($rs['so_tien'], 0, ',', '.') . "";
+					$rs['tien_phatsinh'] = number_format($rs['tien_phatsinh'], 0, ',', '.') . "";
+	
 
 
 				$tpl->assign($rs, 'detail');

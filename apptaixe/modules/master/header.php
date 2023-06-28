@@ -66,8 +66,9 @@ $tpl->cache = _CACHE.'cms_';
 $image_exts = array('.jpg','.jpeg','.gif','.png','.webp');
 $login_user = $_SESSION['admin_login'];
 $login_user['setting'] = $login_user['data']?unserialize($login_user['data']):array();
-$skin_dir = is_dir($tpl->tpl_dir.'skins/'.$login_user['setting']['skin'])?$tpl->tpl_dir.'skins/'.$login_user['setting']['skin']:$tpl->tpl_dir.'skins/default';
-
+//$skin_dir = is_dir($tpl->tpl_dir.'skins/'.$login_user['setting']['skin'])?$tpl->tpl_dir.'skins/'.$login_user['setting']['skin']:$tpl->tpl_dir.'skins/default';
+$skin_dir = is_dir($tpl->tpl_dir.'skins/'.$login_user['setting']['skin'])?$tpl->tpl_dir.'skins/default':$tpl->tpl_dir.'skins/default';
+// print_r($_SESSION['admin_login']);
 
 //Load main template
 //if(!$skin_dir) $tpl->getWarning('The skin '.$login_user['skin'].' don\'t exists');
@@ -92,8 +93,19 @@ $tpl->assign(array(
 	'token'=>$token,
 ));
 
-$tpl->merge($login_user,'login_user');
 
+if(isset($_SESSION['admin_login']))
+{
+//lấy biển số xe 
+$xe = $oContent->view_table("php_doixe","id_taixe = ". $_SESSION['admin_login']['id'] ." LIMIT 1");
+$rs_xe = $xe->fetch();
+$login_user['biensoxe'] =  $rs_xe['biensoxe'];
+$id_secutity_first = rand(1111111,9999999);
+$id_secutity_last = rand(1111111,9999999);
+$id_security =$id_secutity_first .$login_user['id'].$id_secutity_last;
+$login_user['id_security'] =$id_security;
+}
+$tpl->merge($login_user,'login_user');
 if($cfg['language_tab'] == 'tab'){
 	$tpl->box('language_tab');
 }

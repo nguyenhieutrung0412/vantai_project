@@ -1,7 +1,12 @@
 <?php
 
 if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
+    $module = "'ajaxdonhangroi'";
 
+    $action = "'form_add_active'";
+
+
+    $frm = "'frmAddactive'";
     $id = $oClass->id_decode($_POST['id']);
 
     $result = $oContent->view_table("php_donhangroi_s", "`id`=".$id."  LIMIT 1");
@@ -13,8 +18,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
         $rs['color'] = 'color-0';
     }
     else{
+        $rs['check'] = ' line1-check';
         $rs['tinhtrangdon_text'] = 'Đã hoàn thành';
-        $rs['color'] = 'color-1';
+        $rs['color'] = 'color-2';
     }
     if($rs['hinhthucthanhtoan'] == 'nguoiguitra')
     {
@@ -30,6 +36,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
              $rs_kh = $khachhang->fetch();
              
     //end kh
+    
     //mat hàng
     $mathangcon = $oContent->view_table('php_mathang_donhangroi','id_donhangroi = '.$rs['id']);
     while($rs_mathangcon = $mathangcon->fetch()){
@@ -51,6 +58,24 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
         <h4>Chi tiết đơn <span class="color-0">1<span> | <span class="'.$rs['color'].'">'.$rs['tinhtrangdon_text'].'<span></h4>
         <div class="exit-btn"><i class="fa-solid fa-xmark"></i></div>
         <div class="table">
+            <div  class="scroll-x">
+                <table>
+                    <tbody>
+                        <tr>
+                        <td colspan="4">
+                            <div class="timeline timeline3">
+                                <div class="timeline-text  child_timeline3">Hoàn thành</div>
+                                <div class="timeline-line '.$rs['check'].'">
+                                    <a class="btn_hoanthanh" href="javascript:void(0)" onclick="return update_view('.$module.','.$action.','.$_POST['id'].')"><div class="timeline-line_check "><i class="fa-solid fa-truck-fast '.$rs['check'].'"></i></div></a>
+                                </div>
+                            </div>
+                    
+                        </td>
+                        
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
            <table >
                 <thead>
                     <tr>
@@ -164,14 +189,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
                 
                 </tbody>
             </table>
-            
+            <script type="text/javascript" src="template/skins/default/js/common.js"></script>
         </div>
     </div>
     <script>
     
     $(document).ready(function() {
       
-        $(".exit-btn").on("click", function() {
+        $(".exit-btn").click( function() {
             $(".popup_detail").toggleClass("in");
         })
     });

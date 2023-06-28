@@ -2,7 +2,7 @@
     <div class="page">
         <div class="container">
             <div class="title">
-                <h3>Bảng công nợ khách hàng tháng {thang_nam.thang} năm {thang_nam.nam}</h3>
+                <h3>Bảng công nợ hàng trọn gói tháng {thang_nam.thang} năm {thang_nam.nam}</h3>
                 <div class="title-link">
                     <a href="">
                         <p class="active">Dashboard</p>
@@ -14,11 +14,12 @@
                     </a>
                 </div>
             </div>
-            <div class="table">
+            <div class="table table_scroll">
                 <div class="first-table">
                     <div class="btn-new">
-                        <a class="btn-create {xuly.them}" onclick="return add_view('congnokhachhang','add-view')"><i class="fa-solid fa-plus"></i> Tạo mới</a>
+                        <!-- <a class="btn-create {xuly.them}" onclick="return add_view('congnokhachhang','add-view')"><i class="fa-solid fa-plus"></i> Tạo mới</a> -->
                     </div>
+                    
                         <form class="form_search_table" id="form_search_table" method="post" onsubmit="return search_link('congnokhachhang','search','form_search_table')">
                             <input class="input" type="text" name="ma_bangluong" placeholder="Mã ">
                             <select name="thang_search" id="thang_search">
@@ -43,23 +44,32 @@
                             </select>
                             <button >Refresh</button>
                             <button class="info"  type="submit">Search</button>
-                            
+                              <div class="btn-active-all">
+                               
+                            </div>
                         </form>
+                        
                 </div>
                 <table>
                     <thead>
                         <tr  class="title-table">
                             <th>Mã công nợ</th>
                             <th>Tên khách hàng</th>
-                            <th>CMND/CCCD</th>
+                            
                             <th>Số điện thoại khách hàng</th>
                             <th>Địa chỉ khách hàng</th>
                             <th>Tên công ty</th>
-                            <th>Mã số thuế</th>
-                            <th>Số tiền</th>     
-                            <th>Tháng</th>
-                            <th>Năm</th>
-                            <th>Tình trạng</th>
+                       
+                            <th>Tiền vận chuyển</th>
+                            <th>Tiền phát sinh</th>
+                            <th>Phí VAT(%)</th>
+                             <th>Tổng tiền</th>     
+                             <th>Tổng công nợ tháng</th>     
+                           
+                            <th>Chốt</th>
+                            <th>Hạn thu</th>
+                            <th>Thanh toán</th>
+                            <th>Nợ tồn</th>
                             <th>Lựa chọn</th>
                         </tr>
                     </thead>
@@ -68,18 +78,34 @@
                         <tr>
                             <td>{detail.id}</td>
                             <td >{detail.name_kh}</td>
-                            <td>{detail.cmnd}</td>
+                            
                             <td>{detail.phone_kh}</td>
                             <td>{detail.address_kh}</td>
-                            <td>{detail.ten_congty}</td>
-                            <td>{detail.masothue}</td>
+                            <td><a class="color-1" href="/congnokhachhang/donhangtrongoi/?code={detail.id_khachhang_security}&thang={detail.thang}&nam={detail.nam}">{detail.ten_congty}</a></td>
+                          
                             
                             <td>{detail.so_tien}</td>
-                            <td>{detail.thang}</td>
-                            <td>{detail.nam}</td>
-                            <td class="active" ><a {detail.active}  onclick="return active_user('congnokhachhang','active','{detail.id_security}')"> <i class="fa-solid fa-circle "></i> </a></td>
-                            <td class="select"> 
-                                <a class="btn-update {xuly.sua} {detail.edit_delete}" onclick="return update_view('congnokhachhang','update-view',{detail.id_security})" data-id ="{detail.id_security}"> <i class="fa-solid fa-pen icon-edit"></i></a>
+                            <td>{detail.tien_phatsinh}</td>
+                            <td>{detail.phivat}({detail.vat}%)</td>
+                            <td>{detail.tong_tien}</td>
+                            <td>{detail.tong_thanhtoan}</td>
+                            <td class="active" ><a  class="btn-update {detail.active}"  onclick="return update_view('congnokhachhang','chot_congno-view',{detail.id_security})"> <i class="fa-solid fa-circle "></i> </a>
+                            {detail.ngay_chot}</td>
+                            <td>{detail.ngay_thu}</td>
+                            <td>{detail.so_lan_thanh_toan}<br> 
+                            {detail.sotien_thanhtoan} 
+                            <i class="fa-solid fa-plus add btn-update " onclick="return update_view('congnokhachhang','taophieuthu-view',{detail.id_security})"></i></td>
+                            <td class="color-0">{detail.no_ton}</td>
+                           
+                            <td class="select">
+                              <form class="form_search_table_2" id="form_search_table_2" method="post" >
+                                <input class="input" type="hidden" name="id_security" value="{detail.id_security}" placeholder="Mã ">
+
+                               
+                            </form>
+                             <a class="color-1" onclick="return export_Excel('congnokhachhang','excel','form_search_table_2')"><i class="fa-sharp fa-solid fa-file-excel"></i></a> 
+
+                                <a class="btn-update {xuly.sua} remove {detail.edit_delete}" onclick="return update_view('congnokhachhang','update-view',{detail.id_security})" data-id ="{detail.id_security}"> <i class="fa-solid fa-pen icon-edit"></i></a>
                                 <a class=" {xuly.xoa} {detail.edit_delete}" onclick= "return _delete('congnokhachhang','delete','{detail.id_security}')"> <i class="fa-solid fa-trash icon-delete"></i></a>
                             </td>
                         </tr>
@@ -122,6 +148,7 @@
 </div>
 
 <div class="popup-update">    
+
 </div>
 
 

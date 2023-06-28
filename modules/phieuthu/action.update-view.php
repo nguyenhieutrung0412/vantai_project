@@ -91,13 +91,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
         $id_gallery = "'#lightgallery'";
         $str = '
         <div class="pop-up">
-        <h3>Update</h3>
+        <span class="close_pop">×</span>
+        <h3>Cập nhật phiếu thu</h3>
          <form name="frmUpdatephieuthu" id="frmUpdatephieuthu" method="post" onsubmit = "return _edit('.$module.','.$update.','.$frm.','.$img_file.')"  enctype="multipart/form-data">
             
          <table class="table-input">
          <tbody>
             <tr>
-                <td class="td-first">Tên loại thu</td>
+                <td class="td-first">Tên loại thu *</td>
                  <td>
                     <select name="loai_thu" id="loai_thu" >
                      <option value="'.$rs['loai_thu'].'">'.$rs2['loaithu'].'</option>
@@ -106,27 +107,27 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
                 </td>
             </tr>
             <tr>
-                 <td class="td-first">Họ tên người thu</td>
+                 <td class="td-first">Họ tên người thu *</td>
                 <td><input type="text"  name="name_nguoithu"  placeholder="Họ tên người thu" value="'.$rs['name_nguoithu'].'"  required></td>
              </tr>
               <tr>
-                 <td class="td-first">Địa chỉ người thu</td>
+                 <td class="td-first">Địa chỉ người thu *</td>
                 <td><input type="text"  name="diachi_nguoithu"  placeholder="Địa chỉ người thu" value="'.$rs['diachi_nguoithu'].'"  required></td>
              </tr>
               <tr>
-                 <td class="td-first">Số điện thoại người thu</td>
+                 <td class="td-first">Số điện thoại người thu *</td>
                 <td><input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  name="phone_nguoithu" value="'.$rs['phone_nguoithu'].'"   placeholder="Số điện thoại người thu" required></td>
              </tr>
              <tr>
-                 <td class="td-first">Số tiền thu</td>
+                 <td class="td-first">Số tiền thu *</td>
                 <td><input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="'.$rs['sotien_thu'].'"  name="sotien_thu"  placeholder="Số tiền chi" required></td>
              </tr>
              <tr>
-             <td class="td-first">Số tiền bằng chữ</td>
+             <td class="td-first">Số tiền bằng chữ *</td>
             <td><input type="text"   name="sotien_bangchu"  placeholder="Số tiền bằng chữ" value="'.$rs['sotien_bangchu'].'"  required></td>
          </tr>
              <tr>
-                 <td class="td-first">Nội dung thu</td>
+                 <td class="td-first">Nội dung thu *</td>
                 <td><input type="text"  name="noidung_thu" value="'.$rs['noidung_thu'].'"  placeholder="Nội dung thu" required></td>
              </tr>
              <tr>
@@ -147,10 +148,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
             <input type="hidden" name="id" value="'.$rs['id_security'].'">
             <div class="btn-submit">
                 
-                <button type="submit" class="submit">Update</button>
+                <button type="submit" class="submit">Cập nhật</button>
                 <button type="reset" onclick="return cancel()"  class="cancel">Đóng</button>
             </div>
         </form>
+        <script type="text/javascript" src="template/Default/js/main_load.js"></script>
         <script type="text/javascript">
         $(document).ready(function(){
             return animation_img();

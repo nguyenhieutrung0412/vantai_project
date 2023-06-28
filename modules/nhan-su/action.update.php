@@ -1,5 +1,8 @@
 <?php
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
+       //Đổi tiền tệ
+       $tien_luong = $oClass->DoiSoTien(htmlspecialchars(trim($_REQUEST['luong'])));
+       $phu_cap = $oClass->DoiSoTien(htmlspecialchars(trim($_REQUEST['phu_cap'])));
     $chucvu_id = $oContent->view_table("php_phongban", "`chuc_vu`= '".trim($_REQUEST['list_chucvu'])."' LIMIT 1");
     $chucvu_id =$chucvu_id->fetch();
    $data = array(
@@ -12,9 +15,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     'position'=>htmlspecialchars(trim($_REQUEST['list_chucvu'])),
     'position_id'=>$chucvu_id['id'],
     'dateofcompany'=>htmlspecialchars(trim($_REQUEST['dateofcompany'])),
-    'luong_nhansu'=>htmlspecialchars(trim($_REQUEST['luong'])),
-    'phu_cap'=>htmlspecialchars(trim($_REQUEST['phu_cap'])),
-    'tien_baohiem'=>(htmlspecialchars(trim($_REQUEST['luong'])) + htmlspecialchars($_REQUEST['phu_cap']))  * 0.015,
+    'luong_nhansu'=>$tien_luong,
+    'phu_cap'=> $phu_cap,
+   
+    'tien_baohiem'=>$oClass->DoiSoTien(htmlspecialchars(trim($_REQUEST['tien_baohiem']))) ,
     'stk'=>htmlspecialchars(trim($_REQUEST['stk'])),
     'ngan_hang'=>htmlspecialchars(trim($_REQUEST['ngan_hang'])),
     'pwd'=>htmlspecialchars(trim($_REQUEST['password'])),
@@ -29,8 +33,30 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     else{
         $data['pwd'] = md5( $data['pwd']);
     }
+    
+     if($data['position_id'] != 0){
+        
+             
+        $oClass->update("php_nhansu",$data,"id=".$data['id']);
+    
+             die(json_encode(
+              array(
+                  'status'=> '1',
+                  'msg' => 'Cập nhật thành công'
+              )
+             ));
+        
+    
+ 
+        
+     }else{
+         die(json_encode(array(
+             'status' => '0',
+             'msg' => 'Không thể cập nhật dữ liệu (Không thể tạo admin hoặc bị trùng số điện thoại)'
+         )));
+     }
    
-    $oClass->update("php_nhansu",$data,"id=".$data['id']);
+   
    
    die(json_encode(
     array(

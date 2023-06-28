@@ -15,6 +15,7 @@ defined('_ROOT') or die(__FILE__);
 	$tpl->setfile(array(
 		'tpl_meta'=>'tpl_meta.tpl',
 		'tpl_header'=>'tpl_header.tpl',
+		'tpl_navbar'=>'tpl_navbar.tpl',
 		'tpl_body'=>'notification_info.tpl',
 		'tpl_footer'=>'tpl_footer.tpl',
 	));
@@ -55,6 +56,7 @@ defined('_ROOT') or die(__FILE__);
 	$tpl->setfile(array(
 		'tpl_meta'=>'tpl_meta.tpl',
 		'tpl_header'=>'tpl_header.tpl',
+		'tpl_navbar'=>'tpl_navbar.tpl',
 		'tpl_body'=>'notification.tpl',
 		'tpl_footer'=>'tpl_footer.tpl',
 	));

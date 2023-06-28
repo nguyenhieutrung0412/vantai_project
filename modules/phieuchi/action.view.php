@@ -59,7 +59,7 @@ while($rs = $phieu_chi->fetch()){
 	 }
 
 	// format tien te
-	$rs['sotien_chi'] = number_format($rs['sotien_chi'], 0, ',', '.') . "VND";
+	$rs['sotien_chi'] = number_format($rs['sotien_chi'], 0, ',', '.') . "";
 
 	$tpl->assign($rs,'detail');
 	

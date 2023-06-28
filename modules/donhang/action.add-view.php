@@ -14,48 +14,68 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $action = "'donhangtrongoi_form'";
     $idSelect = "'loai_hang_select'";
     $name_form = "'form_donhang'";
-
+    $module_kh = "'khachhang'";
+    $add_kh = "'add-view'";
 
 
 
 
     $str = '
         <div class="pop-up">
-
-            <h3>Thêm mới</h3>
+        <span class="close_pop">×</span>
+            <h3>Thêm mới</h3><div class="close_popup" onclick="return cancel()"><span>Thoát</span></div>
             <form autocomplete="off" name="frmAdddonhang" id="frmAdddonhang" method="post" onsubmit = "return add(' . $module . ',' . $add . ',' . $frm . ',1)"  enctype="multipart/form-data">
             <table class="table-input">
-            <tbody>
+            <thead>
                 <tr>
-                    <td class="td-first">Dịch vụ:</td>
-                    <td> 
-                        <div class="select_filter">
-                            <div class="card_all">
-                                <select name="loai_hang_select" id="loai_hang_select"  onchange="return onchangeDateSelect2(' . $module . ',' . $action . ',' . $idSelect . ',' . $name_form . ');">
-                                    <option value="0">---Chọn dịch vụ---</option>
-                                    <option value="1">Đơn hàng trọn gói</option>
-                                    
-                                </select>
+                    <th colspan="2" class="title_thead">Thông tin khách hàng</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr>
+                    <td colspan = "2">
+                        <div class="input-formsearch">
+                            <label>Khách hàng: *   <span style="color:#39c449;" onclick="return add_view_deletePopup_afteradd('.$module_kh.','.$add_kh.')"><i class="fa-solid fa-plus add"></i></span> </label>
+                            <input class="search_input-donhangtrongoi" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="10" name="search_sdt-donhangtrongoi" id="search_sdt-donhangtrongoi" placeholder ="Nhập 4 số điện thoại cuối để tìm khách hàng"> 
+                            <div class="result_search">
+                                <ul>
+                                
+                                </ul>
                             </div>
                         </div>
                     </td>
-                <tr>
+                
+                </tr>
                 <tr class="form_donhang">
 
                 </tr> 
                 <tr   class = "info_kh">
 
                 </tr>
-                <tr class="form-nguoinhan">
-                </tr>
+                </tbody>
+                </table>
+              
+                <table class="table-input">
+                <thead>
+                    <tr>
+                        <th colspan="2" class="title_thead">Thông tin phí</th>
+                    </tr>
+                </thead>
+                <tbody>
                 <tr class="form-hinhthucthanhtoan">
                 </tr>
+               
+                <tr class="">
+                <td class="td-first">Ghi chú: </td>
                 
+                <td><textarea id="ghichu" name="ghichu" rows="4" cols="50" style="width:99%"></textarea>
+            </td>
+            </tr>
 
                 </tbody> 
                 </table>
                 
-           
+              
                
                
                 <div class="status">
@@ -67,6 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     
                 </div>
             </form>
+            <script type="text/javascript" src="template/Default/js/main_load.js"></script>
         </div>
        
         ';

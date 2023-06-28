@@ -1,6 +1,8 @@
+  
   <div class="left-header " >
+ 
         <div class="logo-header">
-            <img src="images/logo-text.png" alt="logo">
+            <img src="images/logo1.jpg" alt="logo">
         </div>
         <ul>
             <li>
@@ -21,10 +23,10 @@
                 </div>
             </li>
             </ul>
-            <h3>Menu</h3>
+          <br>
             <ul class="left_menu">
                 <li class="nav-item ">
-                    <a class="active" href="{root_dir}"><i class="fa-solid fa-house-chimney"></i> <span>Trang chủ</span></a>
+                    <a class="active" href="{root_dir}trangchu"><i class="fa-solid fa-house-chimney"></i> <span>Trang chủ</span></a>
                 </li>
                 {menu}
                 <!--BOX admin-->

@@ -8,6 +8,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
    );
    if($_SESSION['chucvu_id'] == 0){
     $oClass->update("php_menu_phanquyen",$data,"id=".$data['id']);
+
    }
    else{
     die(json_encode(

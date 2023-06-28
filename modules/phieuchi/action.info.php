@@ -8,7 +8,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
 
     $result = $oContent->view_table("php_phieuchi", "`id`=".$id."  LIMIT 1");
     $rs = $result->fetch();
-    $rs['sotien_chi'] = number_format($rs['sotien_chi'], 0, ',', '.') . "VND";
+    $rs['sotien_chi'] = number_format($rs['sotien_chi'], 0, ',', '.') . "";
     $total = $result->num_rows();
     $result2 = $oContent->view_table("php_loaichi", "`id`=".$rs['loai_chi']."  LIMIT 1");
     $rs2 = $result2->fetch();
@@ -152,11 +152,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
                     </table>
                     </form>
                 </div>
-                <script type="text/javascript">
-                $(document).ready(function(){
-                    return animation_img();
-                });
-                </script>
+                <script type="text/javascript" src="template/Default/js/main_load.js"></script>
+            
     ';
         die(json_encode(
             array(

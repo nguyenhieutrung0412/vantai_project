@@ -26,13 +26,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
         $id_gallery = "'#lightgallery'";
         $str = '
         <div class="pop-up">
-        <h3>Update</h3>
+        <span class="close_pop">×</span>
+        <h3>Cập nhật ứng lương</h3>
          <form name="frmUpdateungluong" id="frmUpdateungluong" method="post" onsubmit = "return _edit('.$module.','.$update.','.$frm.','.$img_file.')"  enctype="multipart/form-data">
             
          <table class="table-input">
          <tbody>
             <tr>
-                <td class="td-first">Tên nhân sự</td>
+                <td class="td-first">Tên nhân sự *</td>
                  <td>
                     <select name="nhan_su" id="nhan_su" >
                      <option value="'.$rs['user_id'].'">'.$rs2['name'].'</option>
@@ -41,7 +42,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
                 </td>
             </tr>
            
-                 <td class="td-first">Số tiền ứng </td>
+                 <td class="td-first">Số tiền ứng * </td>
                 <td><input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  name="so_tien_ung" value="'.$rs['so_tien_ung'].'"   placeholder="Số điện thoại người nhận" required></td>
              </tr>
             
@@ -50,10 +51,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
             <input type="hidden" name="id" value="'.$rs['id_security'].'">
             <div class="btn-submit">
                 
-                <button type="submit" class="submit">Update</button>
+                <button type="submit" class="submit">Cập nhật</button>
                 <button type="reset" onclick="return cancel()"  class="cancel">Đong</button>
             </div>
         </form>
+        <script type="text/javascript" src="template/Default/js/main_load.js"></script>
         <script type="text/javascript">
         $(document).ready(function(){
             return animation_img();

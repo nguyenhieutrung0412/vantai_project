@@ -1,6 +1,44 @@
 <div class="title">Đơn hàng - mã: <span class="color-0">{donhangtrongoi.id}</span></div>
 
 <div class="table">
+<div  class="scroll-x">
+<table>
+    <tbody>
+        <tr>
+        <td colspan="4">
+            <div class="timeline">
+                <div class="timeline-text child1">Xuất bến</div>
+                <div class="timeline-line {donhangtrongoi.check-1}">
+                    <a class="btn-timeline" href="javascript:void(0)" onclick="return add_view_timeline('ajax','timeline-donhangtrongoi-view','{donhangtrongoi.id_security}','xuatben')"><div class="timeline-line_check"><i  class="fa-solid fa-truck-fast {donhangtrongoi.check-1}"></i></div></a>
+                </div>
+            </div>
+            <div class="timeline">
+                <div class="timeline-text child2">Đã lấy hàng</div>
+                <div class="timeline-line {donhangtrongoi.check-2}">
+                    <a class="btn-timeline" href="javascript:void(0)" onclick="return add_view_timeline('ajax','timeline-donhangtrongoi-view','{donhangtrongoi.id_security}','danggiao')"><div class="timeline-line_check"><i class="fa-solid fa-truck-fast {donhangtrongoi.check-2}"></i></div></a>
+                </div>
+            </div>
+            <div class="timeline">
+                <div class="timeline-text child3">Đã giao</div>
+                <div class="timeline-line {donhangtrongoi.check-3}">
+                    <a class="btn-timeline" href="javascript:void(0)"  onclick="return add_view_timeline('ajax','timeline-donhangtrongoi-view','{donhangtrongoi.id_security}','giaohangtoidiachi')"><div class="timeline-line_check"><i class="fa-solid fa-truck-fast {donhangtrongoi.check-3}"></i></div></a>
+                </div>
+            </div>
+            <div class="timeline">
+                <div class="timeline-text child4">Hoàn thành/về bãi</div>
+                <div class="timeline-line {donhangtrongoi.check-4}">
+                    <a class="btn-timeline" href="javascript:void(0)" onclick="return add_view_timeline('ajax','timeline-donhangtrongoi-view','{donhangtrongoi.id_security}','hoanthanh')"><div class="timeline-line_check"><i class="fa-solid fa-truck-fast {donhangtrongoi.check-4}"></i></div></a>
+                </div>
+            </div>
+        </td>
+        
+        </tr>
+    </tbody>
+</table>
+</div>
+<div class="cost">
+    <a class="cost_btn" href="javascript:void(0)" onclick="return update_view('ajaxphiphatsinh','phiphatsinh-view',{donhangtrongoi.id_security})"><i class="fa-solid fa-circle-plus"></i> Thông tin phí phát sinh</a>
+</div>
 <table >
         <thead>
             <tr>
@@ -162,4 +200,13 @@
         
     </table>
       
+</div>
+<div class="popup-timeline">
+
+</div>
+<div class="popup-hoanthanh">
+
+</div>
+<div class="popup-upload-img">
+   
 </div>

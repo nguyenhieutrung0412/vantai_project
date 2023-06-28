@@ -16,7 +16,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     $luongcoban = $nhansu['luong_nhansu'];
                     $phucap = $nhansu['phu_cap'];
                     $tienbaohiem = $nhansu['tien_baohiem'];
-                    $ngaynghi = $model->db->query("SELECT * FROM php_ngaynghi_nhansu WHERE user_id = ".$user_id." AND thang =". $_REQUEST['thang']." AND nam = ".$_REQUEST['nam']);
+                    //$ngaynghi = $model->db->query("SELECT * FROM php_ngaynghi_nhansu WHERE user_id = ".$user_id." AND thang =". $_REQUEST['thang']." AND nam = ".$_REQUEST['nam']);
                     // $tong_ngaynghi = 0;
                     // while($ngaynghi_kphep = $ngaynghi->fetch()){
                     //     if($ngaynghi_kphep['nua_ngay']  == 1 && $ngaynghi_kphep['phep']  == 0 )

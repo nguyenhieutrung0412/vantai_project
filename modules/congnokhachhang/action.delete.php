@@ -7,7 +7,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])) {
     $total = $result->num_rows();
     if ($total == 1) {
         $oClass->delete("php_congnokhachhang", "`id`=" . $id);
-
+        $result2 = $oContent->view_table("php_images", "`type_id`=".$id);
+        while(  $rs2= $result2->fetch()){
+         unlink('data/upload/images/'.$rs2['file_name']);
+         $oClass->delete("php_images","type_id = '".$id."' AND type = 'php_congnohangtrongoi' ");
+        }
         die(json_encode(
             array(
 

@@ -1,5 +1,5 @@
 
-
+    <div class="page">
     <div class="container">
      <div class="back">
                 <a onclick="return back_prev();"><i class="fa-solid fa-arrow-left"></i> Back</a>
@@ -16,4 +16,5 @@
                 </tbody>
             </table>
         </div>
+    </div>
     </div>

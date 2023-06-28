@@ -62,7 +62,7 @@ if($_GET['code'] == '' &&$_GET['thang'] == 0 &&$_GET['nam'] == 0 )
 		//tong ứng lương tháng
 		$tong += $rs['so_tien_ung'];
 		// format tien te
-		$rs['so_tien_ung'] = number_format($rs['so_tien_ung'], 0, ',', '.') . "VND";
+		$rs['so_tien_ung'] = number_format($rs['so_tien_ung'], 0, ',', '.') . "";
 
 		$tpl->assign($rs,'detail');
 		
@@ -70,7 +70,7 @@ if($_GET['code'] == '' &&$_GET['thang'] == 0 &&$_GET['nam'] == 0 )
 	}
 	$tong_ung['tong_ung_luong'] = $tong;
 	// format tien te
-	$tong_ung['tong_ung_luong'] = number_format($tong_ung['tong_ung_luong'], 0, ',', '.') . "VND";
+	$tong_ung['tong_ung_luong'] = number_format($tong_ung['tong_ung_luong'], 0, ',', '.') . "";
 	$tpl->merge($tong_ung,'tong');
 }
 else{
@@ -129,7 +129,7 @@ else{
 		$tong += $rs['so_tien_ung'];
 
 		// format tien te
-		$rs['so_tien_ung'] = number_format($rs['so_tien_ung'], 0, ',', '.') . "VND";
+		$rs['so_tien_ung'] = number_format($rs['so_tien_ung'], 0, ',', '.') . "";
 		
 	
 		$tpl->assign($rs,'detail');
@@ -138,7 +138,7 @@ else{
 	}
 	$tong_ung['tong_ung_luong'] = $tong;
 	// format tien te
-	$tong_ung['tong_ung_luong'] = number_format($tong_ung['tong_ung_luong'], 0, ',', '.') . "VND";
+	$tong_ung['tong_ung_luong'] = number_format($tong_ung['tong_ung_luong'], 0, ',', '.') . "";
 	$tpl->merge($tong_ung,'tong');
 	
 		

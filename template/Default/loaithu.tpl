@@ -13,7 +13,7 @@
                     </a>
                 </div>
             </div>
-            <div class="table">
+            <div class="table table_scroll">
                 <div class="first-table">
                     <div class="btn-new">
                         <a class="btn-create {xuly.them}"><i class="fa-solid fa-plus"></i> Tạo mới</a>
@@ -73,17 +73,18 @@
 
 <div class="popup-create">
         <div class="pop-up">
+        <span class="close_pop">×</span>
             <h3>Thêm mới</h3>
             <form autocomplete="off" name="frmAddloaithu" id="frmAddloaithu" method="post" onsubmit = "return add('loaithu','add','frmAddloaithu',1)"  enctype="multipart/form-data">
                 
         <table class="table-input">
          <tbody>
             <tr>
-                <td class="td-first">Tên loại thu</td>
+                <td class="td-first">Tên loại thu *</td>
                  <td><input type="text" name="name_loaithu"  placeholder="Tên loại thu" required></td>
             </tr>
              <tr>
-                 <td class="td-first">Hạn mức thu</td>
+                 <td class="td-first">Hạn mức thu *</td>
                 <td><input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  name="hanmucthu"  placeholder="Hạn mức thu"></td>
              </tr>
             

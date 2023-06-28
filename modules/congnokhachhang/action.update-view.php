@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])) {
     $rs = $result->fetch();
     $total = $result->num_rows();
     $module = "'congnokhachhang'";
-    $update = "'update'";
+    $update = "'update-chot'";
     $frm = "'frmUpdatecongnokhachhang'";
     $img_file = "'1'";
     $rs['id_security'] = $oClass->id_encode($rs['id']);
@@ -31,29 +31,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])) {
 
         $str = '
         <div class="pop-up">
-        <h3>Update</h3>
+        <span class="close_pop">×</span>
+        <h3>Cập nhật công nợ</h3>
          <form name="frmUpdatecongnokhachhang" id="frmUpdatecongnokhachhang" method="post" onsubmit = "return _edit(' . $module . ',' . $update . ',' . $frm . ',' . $img_file . ')"  enctype="multipart/form-data">
             
          <table class="table-input">
          <tbody>
-            <tr>
-            <td class="td-first">Tên khách hàng:</td>
-            <td> 
-                <div class="select_filter">
-                    <div class="card_all">
-                        <select name="khachhang_select" id="khachhang_select" required>
-                       
-                        ' . $selected . '
-                        ' . $list_option . '
-                        </select>
-                    </div>
-                </div>
+         <tr>
+            <td class="td-first">Tình trạng:</td>
+            <td>
+                <select name="active">
+                    <option value="0">Cập nhật công nợ</option>
+                    
+                    
+                </select>
             </td>
-            <tr>
-            <tr>
-                <td class="td-first">Số tiền:</td>
-                <td><input type="text" value="' . $rs['so_tien'] . '" name="so_tien" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required></td>
-            </tr>
+        </tr>
+            
            
             
            
@@ -61,12 +55,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])) {
             </table>
                 <input type="hidden" name="id" value="' . $rs['id_security'] . '">
                 <div class="btn-submit">
-                <button type="submit" class="submit">Update</button>
+                <button type="submit" class="submit">Cập nhật</button>
                     <button type="reset" onclick="return cancel()" class="cancel">Đóng</button>
                     
                 </div>
             </form>
-                  
+            <script type="text/javascript" src="template/Default/js/main_load.js"></script>
             </div>
         ';
         die(json_encode(

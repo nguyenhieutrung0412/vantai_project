@@ -14,7 +14,7 @@
                     </a>
                 </div>
             </div>
-            <div class="table">
+            <div class="table table_scroll">
                 <div class="first-table">
                     <div class="btn-new">
                         <a class="btn-create {xuly.them}"><i class="fa-solid fa-plus"></i> Tạo mới</a>
@@ -57,8 +57,10 @@
                             <th>Số tiền được chi</th>
                             <th>Nội dung để chi</th>
                             <th>Tên người tạo</th>
-                            <th>Ngày giờ được xét duyệt</th>                 
+                            <th>Ngày giờ được xét duyệt</th>
+                            <!--BOX boxadmin-gd-ktt-->                 
                             <th>Xét duyệt</th>
+                            <!--BOX boxadmin-gd-ktt-->
                             <th>Lựa chọn</th>
                         </tr>
                     </thead>
@@ -75,7 +77,9 @@
                             <td>{detail.noidung_chi}</td>
                             <td>{detail.tennguoitao_chi}</td>
                             <td class="{detail.color-red}">{detail.ngaygio_xetduyet}</td>
+                            <!--BOX boxadmin-gd-ktt-->
                             <td class="active" ><a {detail.active}  onclick="return active_user('phieuchi','active','{detail.id_security}')"> <i class="fa-solid fa-circle "></i> </a></td>
+                            <!--BOX boxadmin-gd-ktt-->
                             <td class="select"> 
                                 <a class ="print" onclick="return Print('phieuchi','print-phieuchi',{detail.id_security})"><i class="fa-solid fa-print"></i></a>
                                 <a class="btn-update {xuly.sua} {detail.edit_delete}" onclick="return update_view('phieuchi','update-view',{detail.id_security})" data-id ="{detail.id_security}"> <i class="fa-solid fa-pen icon-edit"></i></a>
@@ -112,13 +116,14 @@
 
 <div class="popup-create" >
         <div class="pop-up">
+        <span class="close_pop">×</span>
             <h3>Thêm mới</h3>
             <form autocomplete="off" name="frmAddphieuchi" id="frmAddphieuchi" method="post" onsubmit = "return add('phieuchi','add','frmAddphieuchi','img_file')"  enctype="multipart/form-data">
                 
         <table class="table-input">
          <tbody>
             <tr>
-                <td class="td-first">Tên loại chi</td>
+                <td class="td-first">Tên loại chi *</td>
                  <td>
                     <select name="loai_chi" id="loai_chi">
                      <option value="">Chọn loại chi</option>
@@ -129,32 +134,32 @@
                 </td>
             </tr>
             <tr>
-                 <td class="td-first">Họ và tên người nhận</td>
+                 <td class="td-first">Họ và tên người nhận *</td>
                 <td><input type="text"  name="name_nguoinhan"  placeholder="Họ và tên người nhận" required></td>
              </tr>
              <tr>
-                 <td class="td-first">Địa chỉ người nhận</td>
+                 <td class="td-first">Địa chỉ người nhận *</td>
                 <td><input type="text"  name="diachi_nguoinhan"  placeholder="Địa chỉ người nhận" required></td>
              </tr>
              <tr>
-                 <td class="td-first">Số điện thoại người nhận</td>
+                 <td class="td-first">Số điện thoại người nhận *</td>
                 <td><input type="tel"  onkeypress="return event.charCode >= 48 && event.charCode <= 57"  name="phone_nguoinhan"  placeholder="Số điện thoại người nhận" required></td>
              </tr>
 
              <tr>
-                 <td class="td-first">Số tiền chi</td>
+                 <td class="td-first">Số tiền chi *</td>
                 <td><input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  name="sotien_chi"  placeholder="Số tiền chi" required></td>
              </tr>
              <tr>
-                 <td class="td-first">Số tiền chi(Bằng chữ)</td>
+                 <td class="td-first">Số tiền chi(Bằng chữ) *</td>
                 <td><input type="text"  name="sotien_bangchu"  placeholder="Số tiền chi(Bằng chữ)" required></td>
              </tr>
              <tr>
-                 <td class="td-first">Nội dung chi</td>
+                 <td class="td-first">Nội dung chi *</td>
                 <td><input type="text"  name="noidung_chi"  placeholder="Nội dung chi" required></td>
              </tr>
              <tr>
-                 <td class="td-first">Kèm theo</td>
+                 <td class="td-first">Kèm theo *</td>
                 <td><input type="text"  name="kemtheo"  placeholder="kèm theo" required></td>
              </tr>
               <tr>

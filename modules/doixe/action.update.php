@@ -17,6 +17,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         'id' => $oClass->id_decode($_REQUEST['id']),
         'loaixe'=>htmlspecialchars(trim($_REQUEST['loaixe'])),
         'biensoxe'=>htmlspecialchars(trim($_REQUEST['biensoxe'])),
+        'tai_trong'=>htmlspecialchars(trim($_REQUEST['tai_trong'])),
+        'han_dang_kiem'=>htmlspecialchars(trim($_REQUEST['han_dang_kiem'])),
+        'so_khoi'=>htmlspecialchars(trim($_REQUEST['so_khoi'])),
         'taixe'=>end($sdt_tx),
         'id_taixe' => $rs['id'],
 
@@ -25,6 +28,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $data['id_taixe'] = 0;
         $data['taixe'] = '';
         $oClass->update("php_doixe",$data,"id=".$data['id']);
+        $oClass->upload_files('php_doixe',$data['id']);
+        $oClass->upload_images('php_doixe',$data['id'],$chatluong_hinhupload);
        }
        else{
         // $result_tx = $oContent->view_table("php_doixe"," `id_taixe`= ".$data['id_taixe'] );
@@ -37,6 +42,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $data['id_taixe'] = 0;
             $data['taixe'] = '';
             $oClass->update("php_doixe",$data,"id=".$data['id']);
+            $oClass->upload_files('php_doixe',$data['id']);
+            $oClass->upload_images('php_doixe',$data['id'],$chatluong_hinhupload);
             die(json_encode(
                      array(
                          

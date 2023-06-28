@@ -21,8 +21,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
         }
           for($i = 0;$i < count($arr_menu);$i++)
           {
-    
-            if($arr_menu[$i]['active' ] == 1){
+            //xử lý phân quyền ở menu cha 
+            $menu_cha_phanquyen = $model->db->query("SELECT * FROM php_quyen_menucha WHERE id_phongban = ".$id." AND id_menu_cha = ".$arr_menu[$i]['id'] ." AND ten ='". $arr_menu[$i]['name_menu']."' LIMIT 1");
+            $rs_menucha_phanquyen = $menu_cha_phanquyen->fetch();
+
+
+
+            //end 
+            if($rs_menucha_phanquyen['active'] == 1){
                 $arr_menu[$i]['checked_menucha'] = ' checked';
             }
             $menuphanquyen .= '
@@ -63,8 +69,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
                             $menuphanquyen .= '<tr>
                                 <td><span class="name">'.$rs_menuquyen['name'].'</span> <input  class="input-checkbox"  type="checkbox"  name="array['.$rs_menuquyen['id'].'][xem]" '.$rs_quyen['checked_active'].'  > </td>
                                 <td>
-                                    <input class="input-checkbox" type="checkbox" id="checkbox-all'.$rs_menuquyen['id'].'" onclick="return checkAll('.$rs_menuquyen['id'].')" >
-                                    <label for="all">Chọn tất cả</label><br>
+                                   
                                     <input class="input-checkbox check'.$rs_menuquyen['id'].'" type="checkbox" name="array['.$rs_menuquyen['id'].'][them]" '.$rs_quyen['checked_them'].'>
                                     <label for="them">Thêm</label><br>
             
@@ -78,6 +83,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
                                 </td>   
                                                      
                             </tr>';
+                            $backup_1 = ' <input class="input-checkbox" type="checkbox" id="checkbox-all'.$rs_menuquyen['id'].'" onclick="return checkAll('.$rs_menuquyen['id'].')" >
+                            <label for="all">Chọn tất cả</label><br>';
                                   
                             
                         }
@@ -115,8 +122,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
                     
                         <td><span class="name">'.$rs_menuquyen['name'].'</span> <input  class="input-checkbox" type="checkbox"   name="array['.$rs_menuquyen['id'].'][xem]" checked > </td>
                         <td>
-                            <input class="input-checkbox" type="checkbox" id="checkbox-all'.$rs_menuquyen['id'].'"  onclick="return checkAll('.$rs_menuquyen['id'].')">
-                            <label for="all">Chọn tất cả</label><br>
+                            
                             <input class="input-checkbox check'.$rs_menuquyen['id'].'" type="checkbox" name="array['.$rs_menuquyen['id'].'][them]" >
                             <label for="them">Thêm</label><br>
         
@@ -131,9 +137,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
                                             
                     </tr>
                     ';}
+                    $backup = '<input class="input-checkbox" type="checkbox" id="checkbox-all'.$rs_menuquyen['id'].'"  onclick="return checkAll('.$rs_menuquyen['id'].')">
+                    <label for="all">Chọn tất cả</label><br>';
                     }
                 }   
     }
+ 
 
     $module ="'phongban'";
     $action ="'update-phanquyen'";
@@ -142,9 +151,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
 
         $str = '
         <div class="pop-up">
-        <h3>Phân quyền cho phòng ban:'.$rs['chuc_vu'].'  <a onclick="return cancel2()">Thoát</a></h3>
+        <div class="close_popup" onclick="return cancel2()"><span>Thoát</span></div>
+        <h3>Phân quyền cho phòng ban:'.$rs['chuc_vu'].'  </h3>
         <form name="frmUpdatequyen" id="frmUpdatequyen" method="post" onsubmit = "return _edit('.$module.','.$action.','.$form.',1)"  enctype="multipart/form-data">
-           <table class="table-input">
+           <table class="table-input2">
                     <tbody>
                         '.$menuphanquyen.'
                        
@@ -157,7 +167,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
                 <button type="reset" onclick="return cancel2()" class="cancel">Đóng</button>
             </div>
         </form>
-
+        <script type="text/javascript" src="template/Default/js/main_load.js"></script>
         </div>';
         die(json_encode(
             array(
@@ -169,7 +179,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
     
     }else{
         $str = ' <div class="pop-up">
-        <h3>Phân quyền cho phòng ban:'.$rs['chuc_vu'].'  <a onclick="return cancel2()">Thoát</a></h3>
+        <h3>Phân quyền cho phòng ban:'.$rs['chuc_vu'].'   <div class="close_popup" onclick="return cancel2()"><span>Thoát</span></div>
         <form name="frmUpdatequyen" id="frmUpdatequyen" method="post" onsubmit = "return _edit('.$module.','.$action.','.$form.',1)"  enctype="multipart/form-data">
            <table class="table-input">
                     <tbody>
@@ -184,6 +194,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
                 <button type="reset" onclick="return cancel2()" class="cancel">Đóng</button>
             </div>
         </form>
+          <script type="text/javascript" src="template/Default/js/main_load.js"></script>
         </div>';
         die(json_encode(
             array(

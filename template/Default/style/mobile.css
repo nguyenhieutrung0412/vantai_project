@@ -1,0 +1,77 @@
+@media only screen and (max-width: 1025px) {
+    .page {
+        width: 100%;
+        background-color: #f2f7f8;
+        float: right;
+        background-attachment: fixed;
+        position: relative;
+        top: 70px;
+        /* right: 0; */
+    }
+    .row .dothi {
+        width: 98%;
+    }
+    .row .active-menber {
+        width: 98%;
+    }
+    .table_scroll {
+        overflow-x: scroll;
+    }
+    .table .first-table .btn-active-all {
+        float: left;
+        padding: 0 10px 0 0;
+        margin: 15px 0px;
+        clear: both;
+    }
+    .table .first-table .btn-new {
+        margin: 10px 0;
+    }
+    .table .first-table .form-search-table {
+        float: left;
+        padding: 10px 0;
+    }
+}
+
+@media only screen and (max-width: 961px) {
+    .sm {
+        display: none;
+    }
+    #toggle {
+        display: block;
+    }
+    .right .nav-item-left {
+        width: 25%;
+    }
+    .right .nav-item-left .nav-link i {
+        font-size: 24px;
+    }
+    .left-header {
+        display: none;
+        width: 40%;
+        top: 70px;
+    }
+    .right {
+        width: 100%;
+    }
+    .right .nav-bar {
+        width: 100%;
+    }
+    .opacity_05 {
+        opacity: 0.5;
+    }
+    .popup-create .pop-up,
+    .popup-timeline .pop-up,
+    .popup-upload-img .pop-up,
+    .popup-create2 .pop-up,
+    .popup-create_add .pop-up,
+    .popup-update .pop-up,
+    .popup-update2 .pop-up,
+    .popup-images .pop-up,
+    .popup-dieulenh .pop-up,
+    .popup-info .pop-up,
+    .popup-thongtintaixe .pop-up,
+    .popup-phanquyen .pop-up,
+    .popup-send-notification .pop-up {
+        width: 100%;
+    }
+}

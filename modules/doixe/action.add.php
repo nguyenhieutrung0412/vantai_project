@@ -10,6 +10,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $data = array(
     'loaixe'=>htmlspecialchars(trim($_REQUEST['loaixe'])),
     'biensoxe'=>htmlspecialchars(trim($_REQUEST['biensoxe'])),
+    'tai_trong'=>htmlspecialchars(trim($_REQUEST['tai_trong'])),
+    'han_dang_kiem'=>htmlspecialchars(trim($_REQUEST['han_dang_kiem'])),
+    'so_khoi'=>htmlspecialchars(trim($_REQUEST['so_khoi'])),
     'taixe'=>htmlspecialchars(end($sdt_tx)),
     'id_taixe'=>$rs['id'],
     'active'=> 1
@@ -19,12 +22,18 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if($total == 0){
         if($data['id_taixe'] == ''){
             $oClass->insert("php_doixe",$data);
+            $lastid = $model->db->last_insetid("php_doixe");
+            $oClass->upload_files('php_doixe',$lastid);
+            $oClass->upload_images('php_doixe',$lastid,$chatluong_hinhupload);
         }
         else{
             $result_tx = $oContent->view_table("php_doixe"," `id_taixe`= '".$data['id_taixe']."' LIMIT 1");
             $total_tx = $result->num_rows();
             if( $total_tx == 0){
                 $oClass->insert("php_doixe",$data);
+                $lastid = $model->db->last_insetid("php_doixe");
+                $oClass->upload_files('php_doixe',$lastid);
+                $oClass->upload_images('php_doixe',$lastid,$chatluong_hinhupload);
             }
             else{
                 die(json_encode(
